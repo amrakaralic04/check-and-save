@@ -105,7 +105,7 @@
               class="fav"
               type="button"
               [class.active]="isFavorite(p.name)"
-              (click)="toggleFavorite(p.name)"
+              (click)="toggleFavorite(p.name, p.price)"
               aria-label="Dodaj u omiljene"
             ></button>
           </div>

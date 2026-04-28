@@ -145,8 +145,11 @@ export class HomeComponent implements OnInit {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  toggleFavorite(productName: string): void {
-    this.favoritesService.toggle(productName);
+  toggleFavorite(productName: string, price?: number | null): void {
+    this.favoritesService.toggle(productName, {
+      price: price ?? null,
+      imageUrl: "assets/cart-icon.png"
+    });
   }
 
   isFavorite(productName: string): boolean {
