@@ -81,7 +81,7 @@
                 </ng-template>
                 <span class="price-old" *ngIf="product.oldPrice">{{ product.oldPrice.toFixed(2) }} KM</span>
               </div>
-              <button class="card-btn" type="button" (click)="onAddToFavorites(product.name, $event)">
+              <button class="card-btn" type="button" (click)="onAddToFavorites(product, $event)">
                 Dodaj u listu
               </button>
             </div>

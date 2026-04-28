@@ -123,7 +123,7 @@ export class SearchProductsComponent implements OnInit {
     this.router.navigate(['/compare', leftId, productId]);
   }
 
-  onAddToFavorites(productName: string, event?: Event): void {
+  onAddToFavorites(product: ProductCard, event?: Event): void {
     event?.stopPropagation();
 
     if (!this.currentUser.isAuthenticated()) {
@@ -132,8 +132,12 @@ export class SearchProductsComponent implements OnInit {
       return;
     }
 
-    this.favoritesService.toggle(productName);
-    const isFavorite = this.favoritesService.isFavorite(productName);
+    this.favoritesService.toggle(product.name, {
+      publicId: product.id.toString(),
+      price: product.price ?? null,
+      imageUrl: "assets/cart-icon.png"
+    });
+    const isFavorite = this.favoritesService.isFavorite(product.name);
     this.toaster.success(
       isFavorite ? 'Proizvod je dodan u omiljene.' : 'Proizvod je uklonjen iz omiljenih.'
     );
