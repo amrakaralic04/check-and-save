@@ -1,6 +1,7 @@
 <div class="favorites-page">
   <header class="page-header">
     <div class="header-left">
+      <p class="eyebrow">Moja lista</p>
       <h1>
         Omiljeni proizvodi
         <span class="count" *ngIf="favorites.length > 0">{{ favorites.length }}</span>
@@ -10,17 +11,17 @@
 
     <div class="header-actions">
       <button class="btn outline" type="button" routerLink="/client/home">Nazad na početnu</button>
-      <button class="btn" type="button" (click)="clearAll()" [disabled]="favorites.length === 0">
+      <button class="btn danger" type="button" (click)="clearAll()" [disabled]="favorites.length === 0">
         Očisti listu
       </button>
     </div>
   </header>
 
-  <section class="favorites-grid" *ngIf="favorites.length > 0; else emptyState">
+  <section class="favorites-grid" *ngIf="favorites.length > 0; else emptyState" aria-label="Lista omiljenih proizvoda">
     <article class="favorite-card" *ngFor="let item of favorites; trackBy: trackById">
       <div class="card-top">
         <div class="card-media">
-          <img [src]="item.imageUrl || 'assets/cart-icon.png'" [alt]="item.name" />
+          <img [src]="imageSrc(item)" [alt]="item.name" loading="lazy" (error)="onImageError($event)" />
         </div>
 
         <button
@@ -28,17 +29,28 @@
           type="button"
           (click)="confirmRemove(item)"
           aria-label="Ukloni iz omiljenih"
+          title="Ukloni iz omiljenih"
         ></button>
       </div>
 
       <div class="card-body">
-        <div class="name">{{ item.name }}</div>
         <div class="meta">Sačuvano u omiljene</div>
+        <h2 class="name">{{ item.name }}</h2>
 
-        <div class="price-row">
-          <div class="price">
-            {{ item.price !== null ? (item.price | number: '1.2-2') + ' KM' : 'Cijena nije dostupna' }}
-          </div>
+        <div class="price-block" [class.unavailable]="item.price === null">
+          <span class="price-label">Cijena</span>
+          <span class="price">
+            {{ item.price !== null ? (item.price | number: '1.2-2') + ' KM' : 'Nije dostupna' }}
+          </span>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn outline small" type="button" (click)="openProduct(item)" [disabled]="!canOpenProduct(item)">
+            Detalji
+          </button>
+          <button class="btn outline small" type="button" (click)="compareProduct(item)" [disabled]="!canOpenProduct(item)">
+            Poredi
+          </button>
 
           <button class="btn outline small remove" type="button" (click)="confirmRemove(item)">
             Ukloni
@@ -50,7 +62,9 @@
 
   <ng-template #emptyState>
     <div class="empty-state">
-      <p>Još nemate omiljene proizvode.</p>
+      <div class="empty-icon" aria-hidden="true">♡</div>
+      <h2>Još nemate omiljene proizvode.</h2>
+      <p>Dodajte proizvode u omiljene da biste ih kasnije brzo pregledali, poredili i uklonili iz liste.</p>
       <button class="btn" type="button" routerLink="/client/home">Dodaj iz ponude</button>
     </div>
   </ng-template>

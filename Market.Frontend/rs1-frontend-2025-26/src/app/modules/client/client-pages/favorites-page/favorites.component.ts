@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { forkJoin, of, take } from 'rxjs';
 
 import { DialogHelperService } from '../../../shared/services/dialog-helper.service';
@@ -8,6 +8,7 @@ import { DialogButton, DialogType } from '../../../shared/models/dialog-config.m
 import { FavouritesApiService } from '../../../../api-services/favourites/favourites-api.services';
 import { ToasterService } from '../../../../core/services/toaster.service';
 import { FavoritesService } from '../../../shared/services/favorites.services';
+import { ComparisonService } from '../../../public/services/comparison.service';
 import { FavouriteProductCardDto } from '../../../../api-services/favourites/favourites-api.models';
 
 @Component({
@@ -22,7 +23,10 @@ export class FavoritesComponent implements OnInit {
   private favouritesApi = inject(FavouritesApiService);
   private toaster = inject(ToasterService);
   private favoritesService = inject(FavoritesService);
+  private comparisonService = inject(ComparisonService);
+  private router = inject(Router);
 
+  readonly fallbackImage = 'assets/cart-icon.png';
   favorites: FavouriteProductCardDto[] = [];
 
   ngOnInit(): void {
@@ -125,6 +129,46 @@ export class FavoritesComponent implements OnInit {
   trackById(_: number, item: FavouriteProductCardDto): string {
     return item.publicId ?? item.id.toString();
   }
+
+  imageSrc(item: FavouriteProductCardDto): string {
+    return item.imageUrl?.trim() || this.fallbackImage;
+  }
+
+  onImageError(event: Event): void {
+    const image = event.target as HTMLImageElement;
+
+    if (!image.src.endsWith(this.fallbackImage)) {
+      image.src = this.fallbackImage;
+    }
+  }
+
+  canOpenProduct(item: FavouriteProductCardDto): boolean {
+    return this.resolveProductId(item) !== null;
+  }
+
+  openProduct(item: FavouriteProductCardDto): void {
+    const productId = this.resolveProductId(item);
+
+    if (productId === null) {
+      this.toaster.warning('Detalji za ovaj proizvod trenutno nisu dostupni.');
+      return;
+    }
+
+    this.router.navigate(['/product', productId]);
+  }
+
+  compareProduct(item: FavouriteProductCardDto): void {
+    const productId = this.resolveProductId(item);
+
+    if (productId === null) {
+      this.toaster.warning('Poređenje za ovaj proizvod trenutno nije dostupno.');
+      return;
+    }
+
+    this.comparisonService.setSelectedProductIds([productId]);
+    this.router.navigate(['/compare']);
+  }
+
   private syncLocalFavorites(): void {
     const localFavorites = this.favoritesService.favorites();
 
@@ -140,5 +184,15 @@ export class FavoritesComponent implements OnInit {
 
   private isLocalFavorite(publicId: string): boolean {
     return publicId.startsWith('local-') || this.favoritesService.hasPublicId(publicId);
+  }
+
+  private resolveProductId(item: FavouriteProductCardDto): number | null {
+    if (item.productEntityId > 0) {
+      return item.productEntityId;
+    }
+
+    const publicIdAsNumber = Number(item.publicId);
+
+    return Number.isFinite(publicIdAsNumber) && publicIdAsNumber > 0 ? publicIdAsNumber : null;
   }
 }
