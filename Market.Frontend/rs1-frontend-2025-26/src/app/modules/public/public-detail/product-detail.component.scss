@@ -1,0 +1,51 @@
+.detail-page {
+  padding: 1.5rem;
+  background: var(--app-bg-color);
+  color: var(--app-body-text-color);
+  min-height: 100vh;
+}
+
+.detail-card {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) 1fr;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+  }
+
+  .content {
+    padding: 1.25rem;
+  }
+
+  h1 {
+    margin: 0.5rem 0;
+  }
+
+  p {
+    color: var(--app-muted-text-color);
+  }
+}
+
+.category {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--app-primary-tint-color);
+  color: var(--app-primary-dark-color);
+}
+
+.meta-item {
+  margin-top: 0.5rem;
+}
+
+.price {
+  margin-top: 1rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--app-primary-color);
+}

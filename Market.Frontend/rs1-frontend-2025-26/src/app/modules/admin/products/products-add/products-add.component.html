@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="header-card">
+    <h1>Dodaj Proizvod</h1>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Čuvanje podataka...</p>
+      </div>
+
+      <div class="info-banner">
+        <mat-icon>info</mat-icon>
+        <span>Slika se dodaje u sljedećem koraku nakon kreiranja proizvoda.</span>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Naziv proizvoda *</mat-label>
+        <input matInput formControlName="name" placeholder="npr. iPhone 15" />
+        <mat-icon matSuffix>inventory_2</mat-icon>
+        <mat-error *ngIf="hasError('name')">{{ getErrorMessage('name') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opis proizvoda *</mat-label>
+        <textarea matInput rows="5" formControlName="description" placeholder="Unesite opis proizvoda"></textarea>
+        <mat-icon matSuffix>description</mat-icon>
+        <mat-error *ngIf="hasError('description')">{{ getErrorMessage('description') }}</mat-error>
+      </mat-form-field>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Kategorija *</mat-label>
+          <mat-select formControlName="categoryEntityId">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-error *ngIf="hasError('categoryEntityId')">{{ getErrorMessage('categoryEntityId') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Brend *</mat-label>
+          <mat-select formControlName="brandEntityId">
+            <mat-option *ngFor="let brand of brands" [value]="brand.id">
+              {{ brand.name }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>branding_watermark</mat-icon>
+          <mat-error *ngIf="hasError('brandEntityId')">{{ getErrorMessage('brandEntityId') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Prodavnica *</mat-label>
+          <mat-select formControlName="storeEntityId">
+            <mat-option *ngFor="let store of stores" [value]="store.id">
+              {{ store.name }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>storefront</mat-icon>
+          <mat-error *ngIf="hasError('storeEntityId')">{{ getErrorMessage('storeEntityId') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Poslovnica *</mat-label>
+          <mat-select formControlName="branchEntityId">
+            <mat-option *ngFor="let branch of filteredBranches" [value]="branch.id">
+              {{ branch.address }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>location_on</mat-icon>
+          <mat-error *ngIf="hasError('branchEntityId')">{{ getErrorMessage('branchEntityId') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Datum dodavanja *</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateAdded" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('dateAdded')">{{ getErrorMessage('dateAdded') }}</mat-error>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button type="button" mat-stroked-button (click)="onCancel()" [disabled]="isLoading">
+          <mat-icon>close</mat-icon>
+          Otkaži
+        </button>
+        <button type="submit" mat-raised-button [disabled]="form.invalid || isLoading">
+          <mat-icon>arrow_forward</mat-icon>
+          Dalje — Dodaj sliku
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

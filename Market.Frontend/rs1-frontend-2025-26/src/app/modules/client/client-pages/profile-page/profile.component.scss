@@ -1,0 +1,262 @@
+$f-bg: var(--app-page-bg-color);
+$f-surface: var(--app-surface-color);
+$f-green: var(--app-primary-color);
+$f-green-2: var(--app-primary-hover-color);
+$f-beige: var(--app-secondary-color);
+$f-text: var(--app-text-color);
+$f-muted: var(--app-muted-text-color);
+$f-border: var(--app-border-color);
+$f-shadow: var(--app-card-shadow);
+$f-shadow-2: var(--app-strong-shadow);
+
+
+.profile-page {
+  min-height: 100vh;
+  padding: 28px 40px 60px;
+  background: $f-bg;
+  color: $f-text;
+}
+
+.page-header {
+  max-width: 760px;
+  margin: 0 auto 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+
+  h1 {
+    margin: 0 0 5px;
+    font-size: 30px;
+    font-weight: 800;
+    color: $f-text;
+  }
+
+  p {
+    margin: 0;
+    color: $f-muted;
+    font-size: 15px;
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid $f-border;
+  border-radius: 999px;
+  padding: 8px 12px 8px 16px;
+  background: $f-surface;
+  color: $f-text;
+  font-weight: 700;
+  box-shadow: 0 8px 18px $f-shadow;
+
+  span {
+    white-space: nowrap;
+  }
+
+}
+
+.btn,
+.quick-link,
+.edit-btn,
+.logout-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 11px 20px;
+  background: $f-green;
+  color: var(--app-on-primary-color);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 18px $f-shadow;
+  transition: 0.2s ease;
+}
+
+.btn:hover,
+.quick-link:hover,
+.edit-btn:hover,
+.logout-btn:hover:not(:disabled) {
+  background: $f-green-2;
+  transform: translateY(-1px);
+}
+
+.btn.outline {
+  background: $f-surface;
+  color: $f-green;
+  border: 1px solid $f-border;
+  box-shadow: none;
+}
+
+.profile-card {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+  background: $f-surface;
+  border: 1px solid $f-border;
+  border-radius: 24px;
+  padding: 34px 36px 30px;
+  box-shadow: 0 18px 40px $f-shadow;
+}
+
+.profile-actions {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.logout-btn {
+  background: #b42318;
+  color: #fff;
+}
+
+.logout-btn:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.logout-btn:hover:not(:disabled) {
+  background: #8f1d13;
+}
+
+.avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 28px;
+}
+
+.avatar {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  background: $f-green;
+  border: 4px solid $f-surface;
+  box-shadow: 0 14px 28px $f-shadow-2;
+  object-fit: cover;
+}
+
+.info {
+  display: grid;
+  gap: 12px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  border: 1px solid $f-border;
+  border-radius: 12px;
+  padding: 13px 15px;
+  background: $f-surface;
+
+  span {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $f-muted;
+  }
+
+  strong {
+    font-size: 16px;
+    color: $f-text;
+  }
+}
+
+.status {
+  margin: 4px auto 0;
+  width: fit-content;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--app-primary-tint-color);
+  border: 1px solid $f-border;
+  color: $f-green;
+  font-weight: 700;
+}
+
+.status.logged-out {
+  color: #7a1f1f;
+  background: rgba(122, 31, 31, 0.08);
+  border-color: rgba(122, 31, 31, 0.2);
+}
+
+.quick-links {
+  max-width: 560px;
+  margin: 22px auto 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.state-box {
+  max-width: 560px;
+  margin: 0 auto;
+  background: $f-surface;
+  border: 1px solid $f-border;
+  border-radius: 18px;
+  color: $f-text;
+  font-weight: 600;
+  padding: 16px 18px;
+  box-shadow: 0 8px 18px $f-shadow;
+}
+
+.state-box.error {
+  color: #7a1f1f;
+  background: rgba(122, 31, 31, 0.08);
+  border-color: rgba(122, 31, 31, 0.2);
+}
+
+@media (max-width: 650px) {
+  .profile-page {
+    padding: 22px 16px 48px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .header-actions {
+    justify-content: flex-start;
+  }
+
+
+  .profile-card {
+    padding: 92px 20px 26px;
+  }
+
+  .profile-actions {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .avatar {
+    width: 112px;
+    height: 112px;
+
+  }
+}

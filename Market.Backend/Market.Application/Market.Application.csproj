@@ -20,10 +20,4 @@
     <ProjectReference Include="..\Market.Shared\Market.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Modules\Products\Category\Commands\Delete\" />
-    <Folder Include="Modules\Products\Category\Commands\Update\" />
-    <Folder Include="Modules\Products\Category\Queries\GetById\" />
-  </ItemGroup>
-
 </Project>

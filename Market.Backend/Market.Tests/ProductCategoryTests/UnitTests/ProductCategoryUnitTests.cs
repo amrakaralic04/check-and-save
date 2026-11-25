@@ -1,4 +1,4 @@
-using Market.Application.Modules.Catalog.ProductCategories.Commands.Create;
+using Market.Application.Modules.Products.Category.Commands.Create;
 
 namespace Market.Tests.ProductCategoryTests.UnitTests;
 
@@ -20,14 +20,14 @@ public class ProductCategoryUnitTests
     {
         // Arrange
         using var context = GetInMemoryDbContext(); // dispose
-        var handler = new CreateProductCategoryCommandHandler(context);
-        var command = new CreateProductCategoryCommand { Name = "Test Category" };
+        var handler = new CreateCategoryCommandHandler(context);
+        var command = new CreateCategoryCommand { Name = "Test Category" };
 
         // Act
         var resultId = await handler.Handle(command, CancellationToken.None);
 
         // Assert
-        var category = await context.ProductCategories.FindAsync(resultId);
+        var category = await context.Categories.FindAsync(resultId);
         Assert.NotNull(category);
         Assert.Equal("Test Category", category!.Name);
         // (Optional) if using UTC:

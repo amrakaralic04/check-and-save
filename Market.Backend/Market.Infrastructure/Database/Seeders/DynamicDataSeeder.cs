@@ -28,28 +28,28 @@ public static class DynamicDataSeeder
         if (!await context.Categories.AnyAsync())
         {
             context.Categories.AddRange(
-                new Category
+                new CategoryEntity
                 {
                     Name = "Računari",
                     Description = "Racunari",
                     CreatedAtUtc = DateTime.UtcNow
                 },
-                new Category
+                new CategoryEntity
                 {
                     Name = "Mobilni uređaji",
                     CreatedAtUtc = DateTime.UtcNow
                 },
-                new Category
+                new CategoryEntity
                 {
                     Name = "Periferija",
                     CreatedAtUtc = DateTime.UtcNow
                 },
-                new Category
+                new CategoryEntity
                 {
                     Name = "Komponente",
                     CreatedAtUtc = DateTime.UtcNow
                 },
-                new Category
+                new CategoryEntity
                 {
                     Name = "Audio oprema",
                     CreatedAtUtc = DateTime.UtcNow

@@ -1,4 +1,14 @@
-﻿namespace Market.Application.Common;
+﻿using Market.Application.Modules.Identity.Activity.Queries.List;
+using Market.Application.Modules.Identity.Manager.Queries.List;
+using Market.Application.Modules.Identity.User.Queries.List;
+using Market.Application.Modules.Products.Comparison.Queries.List;
+using Market.Application.Modules.Products.Favorites.Queries.List;
+using Market.Application.Modules.Products.ItemComparison.Queries.List;
+using Market.Application.Modules.Products.Price.Queries.List;
+using Market.Application.Modules.Products.Product.Queries.List;
+using Market.Application.Modules.Products.Review.Queries.List;
+
+namespace Market.Application.Common;
 
 public sealed class PageResult<T>
 {
@@ -35,5 +45,50 @@ public sealed class PageResult<T>
             TotalItems = total,
             TotalPages = includeTotal ? (int)Math.Ceiling(total / (double)paging.PageSize) : 0
         };
+    }
+
+    internal static async Task<PageResult<ListComparisonsQueryDto>> FromQueryableAsync(IQueryable<ListComparisonsQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListFavoritesQueryDto>> FromQueryableAsync(IQueryable<ListFavoritesQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListItemComparisonsQueryDto>> FromQueryableAsync(IQueryable<ListItemComparisonsQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListPricesQueryDto>> FromQueryableAsync(IQueryable<ListPricesQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListProductsQueryDto>> FromQueryableAsync(IQueryable<ListProductsQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListReviewsQueryDto>> FromQueryableAsync(IQueryable<ListReviewsQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListActivitiesQueryDto>> FromQueryableAsync(IQueryable<ListActivitiesQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListManagersQueryDto>> FromQueryableAsync(IQueryable<ListManagersQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static async Task<PageResult<ListMarketUsersQueryDto>> FromQueryableAsync(IQueryable<ListMarketUsersQueryDto> pq, object page, CancellationToken ct)
+    {
+        throw new NotImplementedException();
     }
 }

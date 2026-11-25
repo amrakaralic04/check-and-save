@@ -1,0 +1,57 @@
+<div class="map-page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="header-left">
+      <h1>Mapa prodavnica</h1>
+      <p>Brzo pronađite najbližu prodavnicu i uporedite cijene.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn outline" type="button" routerLink="/client/home">
+        Nazad na početnu
+      </button>
+    </div>
+  </header>
+
+  <!-- Loading state -->
+  <div class="state-card" *ngIf="isLoading()">
+    <div class="spinner"></div>
+    <p>Učitavanje mape...</p>
+  </div>
+
+  <!-- Error state -->
+  <div class="state-card state-card--error" *ngIf="!isLoading() && hasError()">
+    <p>Greška pri učitavanju podataka. Pokušajte ponovo.</p>
+    <button class="btn" (click)="retryLoad()">Pokušaj ponovo</button>
+  </div>
+
+  <!-- Map container — uvijek u DOM-u da Leaflet može inicijalizirati -->
+  <section class="map-section" [class.map-section--hidden]="isLoading() || hasError()">
+    <div #mapContainer class="leaflet-map"></div>
+  </section>
+
+  <!-- Branch list -->
+  <section
+    class="store-list"
+    *ngIf="!isLoading() && !hasError() && branches().length > 0">
+    <article
+      class="store-card"
+      *ngFor="let branch of branches()"
+      (click)="onCardClick(branch)"
+      [class.store-card--active]="selectedBranch()?.id === branch.id">
+      <div class="store-name">{{ branch.storeName }}</div>
+      <div class="store-address">{{ branch.address }}</div>
+      <div class="store-meta">
+        <span class="meta-pill">{{ branch.contact }}</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- Empty state -->
+  <div
+    class="state-card"
+    *ngIf="!isLoading() && !hasError() && branches().length === 0">
+    <p>Nema prodavnica sa dostupnim lokacijama.</p>
+  </div>
+
+</div>

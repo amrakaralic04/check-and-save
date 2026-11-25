@@ -1,41 +1,98 @@
-<!-- src/app/pages/landing/landing.component.html -->
 <div class="landing-page">
+
   <!-- Hero Section -->
   <section class="hero-section">
+    <div class="hero-bg">
+      <div class="hero-bg__blob blob-1"></div>
+      <div class="hero-bg__blob blob-2"></div>
+      <div class="hero-bg__grid"></div>
+    </div>
+
     <div class="hero-content">
       <div class="hero-text">
-        <div class="logo-container">
-          <mat-icon class="logo-icon">storefront</mat-icon>
-          <h1 class="brand-name">FIT Market</h1>
+
+        <div class="brand-lockup">
+          <div class="brand-icon">
+            <mat-icon>storefront</mat-icon>
+          </div>
+          <span class="brand-name">Check<span class="brand-ampersand">&</span>Save</span>
         </div>
-        <h2 class="hero-title">Moderna platforma za upravljanje marketom</h2>
+
+        <h1 class="hero-title">
+          Pronađi <span class="hero-title__accent">najbolju cijenu</span><br>
+          u tvojoj okolini.
+        </h1>
+
         <p class="hero-description">
-          Pojednostavite vaše poslovanje sa našim intuitivnim sistemom za upravljanje proizvodima,
-          kategorijama i zalihama. Sve što vam treba na jednom mjestu.
+          Uporedi cijene iz Store1, Store2, Store3 i Store4 na jednom mjestu.
+          Uštedi vrijeme i novac — svaki put.
         </p>
+
         <div class="hero-actions">
-          <button mat-raised-button color="primary" class="cta-button" routerLink="/auth/login">
-            <mat-icon>rocket_launch</mat-icon>
-            Započni sada
+          <button mat-raised-button class="btn-primary" (click)="navigateCta('/auth/register')">
+            <mat-icon>person_add</mat-icon>
+            Registruj se besplatno
           </button>
-          <button mat-stroked-button class="secondary-button">
-            <mat-icon>play_circle</mat-icon>
-            Pogledaj demo
+          <button mat-stroked-button class="btn-secondary" (click)="navigateCta('/auth/login')">
+            <mat-icon>login</mat-icon>
+            Prijavi se
           </button>
         </div>
+
+        <div class="hero-stores">
+          <span class="stores-label">Dostupno u:</span>
+          <div class="store-chips">
+            <span class="store-chip">Store1</span>
+            <span class="store-chip">Store2</span>
+            <span class="store-chip">Store3</span>
+            <span class="store-chip">Store4</span>
+          </div>
+        </div>
+
       </div>
-      <div class="hero-image">
-        <div class="floating-card card-1">
-          <mat-icon>inventory_2</mat-icon>
-          <span>1,250+ Proizvoda</span>
+
+      <div class="hero-visual">
+        <div class="price-card price-card--main">
+          <div class="price-card__header">
+            <div class="price-card__img-placeholder">
+              <mat-icon>local_grocery_store</mat-icon>
+            </div>
+            <div>
+              <p class="price-card__name">Mlijeko 1L</p>
+              <p class="price-card__category">Mliječni proizvodi</p>
+            </div>
+          </div>
+          <div class="price-card__prices">
+            <div class="price-row price-row--best">
+              <span class="price-row__store">Store1</span>
+              <span class="price-row__badge">Najjeftinije</span>
+              <span class="price-row__price">1.85 KM</span>
+            </div>
+            <div class="price-row">
+              <span class="price-row__store">Store2</span>
+              <span class="price-row__price">1.99 KM</span>
+            </div>
+            <div class="price-row">
+              <span class="price-row__store">Store3</span>
+              <span class="price-row__price">2.10 KM</span>
+            </div>
+          </div>
         </div>
-        <div class="floating-card card-2">
-          <mat-icon>trending_up</mat-icon>
-          <span>95% Zadovoljstvo</span>
+
+        <div class="floating-badge badge--save">
+          <mat-icon>savings</mat-icon>
+          <div>
+            <p class="badge__value">Uštedi 14%</p>
+            <p class="badge__sub">vs. skuplja opcija</p>
+          </div>
         </div>
-        <div class="floating-card card-3">
-          <mat-icon>speed</mat-icon>
-          <span>Brzo & Efikasno</span>
+
+        <div class="floating-badge badge--stores">
+          <mat-icon>location_on</mat-icon>
+          <div>
+            <p class="badge__value">4 prodavnice</p>
+            <p class="badge__sub">u tvojoj blizini</p>
+          </div>
         </div>
       </div>
     </div>
@@ -43,66 +100,33 @@
 
   <!-- Features Section -->
   <section class="features-section">
-    <div class="section-header">
-      <h2 class="section-title">Zašto odabrati FIT Market?</h2>
-      <p class="section-subtitle">
-        Sve funkcionalnosti koje su vam potrebne za uspješno vođenje biznisa
-      </p>
-    </div>
-
-    <div class="features-grid">
-      <div class="feature-card mat-elevation-z2">
-        <div class="feature-icon">
-          <mat-icon>category</mat-icon>
-        </div>
-        <h3>Upravljanje kategorijama</h3>
-        <p>
-          Organizujte proizvode u logične kategorije i podkategorije. Brza pretraga i filtriranje.
-        </p>
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Zašto odabrati Check&amp;Save?</h2>
+        <p class="section-subtitle">Sve što ti treba za pametnu kupovinu</p>
       </div>
 
-      <div class="feature-card mat-elevation-z2">
-        <div class="feature-icon">
-          <mat-icon>inventory</mat-icon>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><mat-icon>compare_arrows</mat-icon></div>
+          <h3>Poređenje cijena</h3>
+          <p>Uporedi isti proizvod u svim prodavnicama odjednom i uvijek odaberi najpovoljniju opciju.</p>
         </div>
-        <h3>Kontrola zaliha</h3>
-        <p>Praćenje stanja zaliha u realnom vremenu. Automatska obavještenja za niske zalihe.</p>
-      </div>
-
-      <div class="feature-card mat-elevation-z2">
-        <div class="feature-icon">
-          <mat-icon>analytics</mat-icon>
+        <div class="feature-card">
+          <div class="feature-icon"><mat-icon>speed</mat-icon></div>
+          <h3>Brz i responsivan</h3>
+          <p>Optimizovana platforma koja radi brzo na svim uređajima. Pristupite bilo gdje, bilo kada.</p>
         </div>
-        <h3>Analitika i izvještaji</h3>
-        <p>
-          Detaljni izvještaji o prodaji, trendovima i performansama. Donosite informisane odluke.
-        </p>
-      </div>
-
-      <div class="feature-card mat-elevation-z2">
-        <div class="feature-icon">
-          <mat-icon>speed</mat-icon>
+        <div class="feature-card">
+          <div class="feature-icon"><mat-icon>security</mat-icon></div>
+          <h3>Sigurnost podataka</h3>
+          <p>Vaši podaci su zaštićeni najnovijim sigurnosnim protokolima. Redovne backup kopije.</p>
         </div>
-        <h3>Brz i responsivan</h3>
-        <p>
-          Optimizovana platforma koja radi brzo na svim uređajima. Pristupite bilo gdje, bilo kada.
-        </p>
-      </div>
-
-      <div class="feature-card mat-elevation-z2">
-        <div class="feature-icon">
-          <mat-icon>security</mat-icon>
+        <div class="feature-card">
+          <div class="feature-icon"><mat-icon>support_agent</mat-icon></div>
+          <h3>24/7 podrška</h3>
+          <p>Naš tim je uvijek tu da vam pomogne. Brzi odgovori i profesionalna podrška.</p>
         </div>
-        <h3>Sigurnost podataka</h3>
-        <p>Vaši podaci su zaštićeni najnovijim sigurnosnim protokolima. Redovne backup kopije.</p>
-      </div>
-
-      <div class="feature-card mat-elevation-z2">
-        <div class="feature-icon">
-          <mat-icon>support_agent</mat-icon>
-        </div>
-        <h3>24/7 podrška</h3>
-        <p>Naš tim je uvijek tu da vam pomogne. Brzi odgovori i profesionalna podrška.</p>
       </div>
     </div>
   </section>
@@ -115,19 +139,16 @@
         <div class="stat-number">500+</div>
         <div class="stat-label">Aktivnih korisnika</div>
       </div>
-
       <div class="stat-card">
         <mat-icon class="stat-icon">shopping_cart</mat-icon>
         <div class="stat-number">10,000+</div>
         <div class="stat-label">Proizvoda u sistemu</div>
       </div>
-
       <div class="stat-card">
         <mat-icon class="stat-icon">schedule</mat-icon>
         <div class="stat-number">99.9%</div>
         <div class="stat-label">Uptime garancija</div>
       </div>
-
       <div class="stat-card">
         <mat-icon class="stat-icon">star</mat-icon>
         <div class="stat-number">4.9/5</div>
@@ -141,10 +162,131 @@
     <div class="cta-content">
       <h2>Spremni da počnete?</h2>
       <p>Pridružite se stotinama zadovoljnih korisnika koji su već unaprijedili svoje poslovanje</p>
-      <button mat-raised-button color="primary" class="cta-large-button" routerLink="/auth/login">
+      <button mat-raised-button class="btn-primary cta-large-button" (click)="navigateCta('/auth/login')">
         <mat-icon>login</mat-icon>
         Prijavite se sada
       </button>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <!-- Brand kolona -->
+      <div class="footer-col footer-col--brand">
+        <div class="footer-brand">
+          <div class="footer-brand__icon">
+            <mat-icon>storefront</mat-icon>
+          </div>
+          <span class="footer-brand__name">Check<span class="footer-brand__amp">&</span>Save</span>
+        </div>
+        <p class="footer-brand__desc">
+          Platforma za poređenje cijena proizvoda u prodavnicama u Mostaru. Uštedi novac i vrijeme svaki dan.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="footer-social__link" aria-label="Facebook">
+            <mat-icon>facebook</mat-icon>
+          </a>
+          <a href="#" class="footer-social__link" aria-label="Instagram">
+            <mat-icon>camera_alt</mat-icon>
+          </a>
+          <a href="#" class="footer-social__link" aria-label="Email">
+            <mat-icon>email</mat-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- Popularno kolona -->
+      <div class="footer-col">
+        <h4 class="footer-col__title">
+          <mat-icon>trending_up</mat-icon>
+          Popularno
+        </h4>
+        <ul class="footer-links">
+          <li><a routerLink="/client/home" class="footer-link">Popularni proizvodi</a></li>
+          <li><a routerLink="/client/home" [queryParams]="{category: 'namirnice'}" class="footer-link">Namirnice</a></li>
+          <li><a routerLink="/client/home" [queryParams]="{category: 'elektronika'}" class="footer-link">Elektronika</a></li>
+          <li><a routerLink="/client/home" [queryParams]="{category: 'drogerija'}" class="footer-link">Drogerija</a></li>
+          <li><a routerLink="/client/home" [queryParams]="{category: 'akcije'}" class="footer-link">Akcije</a></li>
+        </ul>
+      </div>
+
+      <!-- Kategorije kolona -->
+      <div class="footer-col">
+        <h4 class="footer-col__title">
+          <mat-icon>category</mat-icon>
+          Kategorije
+        </h4>
+        <ul class="footer-links">
+          <li><a routerLink="/client/map" class="footer-link">Mapa prodavnica</a></li>
+          <li><a routerLink="/client/favorites" class="footer-link">Omiljeni proizvodi</a></li>
+          <li><a routerLink="/auth/register" class="footer-link">Registracija</a></li>
+          <li><a routerLink="/auth/login" class="footer-link">Prijava</a></li>
+        </ul>
+      </div>
+
+      <!-- O nama kolona -->
+      <div class="footer-col">
+        <h4 class="footer-col__title">
+          <mat-icon>info</mat-icon>
+          O nama
+        </h4>
+        <ul class="footer-links">
+          <li><span class="footer-link footer-link--text">Check&amp;Save je studentski projekat razvijen na FIT-u Mostar.</span></li>
+          <li><span class="footer-link footer-link--text">Predmet: Razvoj softvera I</span></li>
+          <li><span class="footer-link footer-link--text">Akademska godina: 2025/26</span></li>
+        </ul>
+      </div>
+
+      <!-- Kontakt kolona -->
+      <div class="footer-col">
+        <h4 class="footer-col__title">
+          <mat-icon>contact_support</mat-icon>
+          Kontakt
+        </h4>
+        <ul class="footer-links">
+          <li>
+            <a href="mailto:info@checkandsave.ba" class="footer-link footer-link--contact">
+              <mat-icon>email</mat-icon>
+              info@checkandsave.ba
+            </a>
+          </li>
+          <li>
+            <span class="footer-link footer-link--contact">
+              <mat-icon>location_on</mat-icon>
+              Mostar, BiH
+            </span>
+          </li>
+          <li>
+            <span class="footer-link footer-link--contact">
+              <mat-icon>schedule</mat-icon>
+              Pon - Pet: 09:00 - 17:00
+            </span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom -->
+    <div class="footer-bottom">
+      <div class="footer-bottom__inner">
+        <p class="footer-bottom__copy">
+          &copy; {{ currentYear }} Check&amp;Save. Sva prava zadržana.
+        </p>
+        <div class="footer-bottom__links">
+          <a routerLink="/auth/login" class="footer-bottom__link">Politika privatnosti</a>
+          <span class="footer-bottom__sep">·</span>
+          <a routerLink="/auth/login" class="footer-bottom__link">Uslovi korištenja</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="scroll-to-top" *ngIf="showScrollTop" (click)="scrollToTop()">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
+
 </div>

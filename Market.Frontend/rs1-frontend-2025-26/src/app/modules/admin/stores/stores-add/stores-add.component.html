@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="header-card">
+    <h1>Dodaj Prodavnicu</h1>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Čuvanje podataka...</p>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Naziv prodavnice *</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="npr. Bingo Centar"
+        />
+        <mat-icon matSuffix>storefront</mat-icon>
+        <mat-error *ngIf="hasError('name')">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Kontakt telefon *</mat-label>
+        <input
+          matInput
+          formControlName="contact"
+          placeholder="npr. +387 33 123 456"
+        />
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="hasError('contact')">
+          {{ getErrorMessage('contact') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email adresa *</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="npr. kontakt@prodavnica.ba"
+        />
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="hasError('email')">
+          {{ getErrorMessage('email') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Grad *</mat-label>
+        <mat-select formControlName="cityEntityId">
+          <mat-option *ngFor="let city of cities" [value]="city.id">
+            {{ city.name }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>location_city</mat-icon>
+        <mat-error *ngIf="hasError('cityEntityId')">
+          {{ getErrorMessage('cityEntityId') }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button type="button" mat-stroked-button (click)="onCancel()" [disabled]="isLoading">
+          <mat-icon>close</mat-icon>
+          Otkaži
+        </button>
+
+        <button
+          type="submit"
+          mat-raised-button
+          [disabled]="form.invalid || isLoading"
+        >
+          <mat-icon>save</mat-icon>
+          Sačuvaj
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

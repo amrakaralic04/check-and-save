@@ -1,1 +1,156 @@
-<p>search-products works!</p>
+<section class="search-page">
+  <div class="search-shell">
+    <div class="search-block">
+      <p class="eyebrow">Pretraga proizvoda</p>
+      <h1 class="title">Pronađi najbolju cijenu za svaki proizvod</h1>
+      <p class="subtitle">
+        Upiši naziv proizvoda i koristi globalne akcije za filtriranje, sortiranje i čuvanje pretraga.
+      </p>
+
+      <div class="search-bar">
+        <mat-icon class="search-icon" aria-hidden="true">search</mat-icon>
+        <input
+          type="text"
+          placeholder="Pretraži proizvode (npr. kafa, mlijeko, šampon...)"
+          [(ngModel)]="query"
+          (ngModelChange)="onQueryChange($event)"
+          aria-label="Unesite pojam za pretragu"
+        />
+        <button class="search-submit" type="button" (click)="onSearch()">Pretraži</button>
+      </div>
+
+      <div class="quick-tags" aria-label="Brzi filteri">
+        <button
+          class="tag"
+          type="button"
+          *ngFor="let tag of quickTags"
+          [class.active]="activeTag === tag"
+          (click)="setActiveTag(tag)"
+        >
+          {{ tag }}
+        </button>
+      </div>
+
+      <section class="results">
+        <div class="results-header">
+          <div>
+            <h2>{{ resultsTitle }}</h2>
+            <p>{{ resultsSubtitle }}</p>
+          </div>
+          <span class="results-count">{{ resultsCount }} rezultata</span>
+        </div>
+
+        <div class="results-grid">
+          <p class="comparison-hint">Savjet: kliknite "Compare" na karticama ili Ctrl/⌘ + klik na karticu za dodavanje u poređenje.</p>
+          <div class="empty-state" *ngIf="filteredProducts.length === 0">
+            <mat-icon aria-hidden="true">inventory_2</mat-icon>
+            <h3>Nema proizvoda u kategoriji {{ activeTag }}</h3>
+            <p>Odaberite drugi filter ili uklonite brzi tag da biste vidjeli rezultate.</p>
+          </div>
+          <article
+            class="result-card"
+            *ngFor="let product of filteredProducts"
+            tabindex="0"
+            role="button"
+            (click)="onCardClick(product.id, $event)"
+            (keydown.enter)="onCardClick(product.id, $event)"
+          >
+            <div class="card-badge" *ngIf="product.badge">{{ product.badge }}</div>
+            <div class="card-top">
+
+              <!-- Carousel ako ima images, fallback na stari prikaz -->
+              <div class="card-media" aria-hidden="true" (click)="$event.stopPropagation()">
+                <app-product-image-carousel
+                  *ngIf="product.images && product.images.length > 0; else iconFallback"
+                  [images]="product.images"
+                  [autoPlay]="false">
+                </app-product-image-carousel>
+                <ng-template #iconFallback>
+                  <div class="card-media-icon" [style.background]="product.imageBg">
+                    <mat-icon>shopping_bag</mat-icon>
+                  </div>
+                </ng-template>
+              </div>
+
+              <div class="card-meta">
+                <span class="card-label">{{ product.category }}</span>
+                <span class="card-store">{{ product.storeLabel }}</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3>{{ product.name }}</h3>
+              <p *ngIf="product.note; else noNote">{{ product.note }}</p>
+              <ng-template #noNote>
+                <p>Najniža cijena trenutno dostupna.</p>
+              </ng-template>
+            </div>
+            <div class="card-footer">
+              <div class="price-group">
+                <span class="price" *ngIf="product.price !== null && product.price !== undefined; else noPrice">
+                  {{ product.price.toFixed(2) }} KM
+                </span>
+                <ng-template #noPrice>
+                  <span class="price">N/A</span>
+                </ng-template>
+                <span class="price-old" *ngIf="product.oldPrice">{{ product.oldPrice.toFixed(2) }} KM</span>
+              </div>
+              <div class="card-actions">
+                <button
+                  class="card-btn compare-toggle"
+                  type="button"
+                  [class.active]="isSelectedForComparison(product.id)"
+                  [attr.aria-pressed]="isSelectedForComparison(product.id)"
+                  (click)="toggleCompare(product.id, $event)"
+                >
+                  <mat-icon aria-hidden="true">{{ isSelectedForComparison(product.id) ? 'check_circle' : 'compare_arrows' }}</mat-icon>
+                  Compare
+                </button>
+                <button class="card-btn" type="button" (click)="onAddToFavorites(product, $event)">
+                  Dodaj u listu
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="global-actions" aria-label="Globalne akcije">
+      <div class="actions-header">
+        <h2>Globalne akcije</h2>
+        <p>Kontrolišite način prikaza rezultata i sačuvajte omiljene opcije.</p>
+      </div>
+
+      <div class="actions-grid">
+        <button
+          class="action-card"
+          type="button"
+          *ngFor="let action of globalActions"
+        >
+          <span class="action-icon">
+            <mat-icon>{{ action.icon }}</mat-icon>
+          </span>
+          <span class="action-text">
+            <span class="action-title">{{ action.title }}</span>
+            <span class="action-sub">{{ action.subtitle }}</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="action-footer">
+        <button class="ghost-btn" type="button">Napredna pretraga</button>
+        <button class="primary-btn" type="button">Sačuvaj filtere</button>
+      </div>
+    </aside>
+  </div>
+  <div class="comparison-action-bar" *ngIf="selectedComparisonIds.length > 0" role="status">
+    <div>
+      <strong>{{ selectedComparisonIds.length }}</strong>
+      <span>odabranih proizvoda za poređenje</span>
+    </div>
+    <div class="comparison-actions">
+      <button type="button" class="comparison-clear" (click)="clearComparison($event)">Očisti</button>
+      <a class="comparison-link" routerLink="/compare">Otvori poređenje</a>
+    </div>
+  </div>
+</section>

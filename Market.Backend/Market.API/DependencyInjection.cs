@@ -40,16 +40,15 @@ public static class DependencyInjection
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
-        // JWT auth (reads from IOptions<JwtOptions>)
+        // JWT auth
         services.AddAuthentication(o =>
         {
             o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-        .AddJwtBearer((o) =>
+        .AddJwtBearer(o =>
         {
             var jwt = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>()!;
-
             o.TokenValidationParameters = new()
             {
                 ValidateIssuer = true,
@@ -65,9 +64,18 @@ public static class DependencyInjection
 
         services.AddAuthorization(o =>
         {
+            // Default — svaki endpoint traži autentifikaciju
             o.FallbackPolicy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .Build();
+
+            // Role-based policy: admin, manager ili public user
+            o.AddPolicy("AuthenticatedUser", policy =>
+                policy.RequireAuthenticatedUser()
+                      .RequireAssertion(ctx =>
+                          ctx.User.HasClaim("is_admin", "true") ||
+                          ctx.User.HasClaim("is_manager", "true") ||
+                          ctx.User.HasClaim("is_public_user", "true")));
         });
 
         // Swagger with Bearer auth

@@ -1,9 +1,20 @@
 <mat-sidenav-container class="sidenav-container">
-  <!-- SIDEBAR -->
+
   <mat-sidenav mode="side" opened class="sidenav">
-    <!-- SIDEBAR HEADER WITH USER INFO -->
+
     <div class="sidebar-header">
-      <!-- User Info -->
+
+      <!-- Brand Logo — identičan kao client home (bež pozadina, zelena ikona) -->
+      <div class="brand-lockup">
+        <div class="brand-mark">
+          <mat-icon>storefront</mat-icon>
+        </div>
+        <div class="brand-text">
+          <div class="brand-name">Check<span class="brand-amp">&</span>Save</div>
+          <div class="brand-sub">Admin panel</div>
+        </div>
+      </div>
+
       <div class="user-info">
         <div class="user-avatar">
           <mat-icon>account_circle</mat-icon>
@@ -12,26 +23,25 @@
           <div class="user-email">{{ auth.currentUser()?.email }}</div>
           <div class="user-role">
             @if (auth.isAdmin()) {
-            <mat-chip class="role-chip admin">
-              <mat-icon>admin_panel_settings</mat-icon>
-              {{ 'ADMIN_PANEL.ROLES.ADMIN' | translate }}
-            </mat-chip>
+              <mat-chip class="role-chip admin">
+                <mat-icon>admin_panel_settings</mat-icon>
+                {{ 'ADMIN_PANEL.ROLES.ADMIN' | translate }}
+              </mat-chip>
             } @else if (auth.isManager()) {
-            <mat-chip class="role-chip manager">
-              <mat-icon>manage_accounts</mat-icon>
-              {{ 'ADMIN_PANEL.ROLES.MANAGER' | translate }}
-            </mat-chip>
+              <mat-chip class="role-chip manager">
+                <mat-icon>manage_accounts</mat-icon>
+                {{ 'ADMIN_PANEL.ROLES.MANAGER' | translate }}
+              </mat-chip>
             } @else if (auth.isPublicUser()) {
-            <mat-chip class="role-chip employee">
-              <mat-icon>badge</mat-icon>
-              {{ 'ADMIN_PANEL.ROLES.EMPLOYEE' | translate }}
-            </mat-chip>
+              <mat-chip class="role-chip employee">
+                <mat-icon>badge</mat-icon>
+                {{ 'ADMIN_PANEL.ROLES.EMPLOYEE' | translate }}
+              </mat-chip>
             }
           </div>
         </div>
       </div>
 
-      <!-- Language Selector -->
       <div class="language-selector">
         <button mat-icon-button [matMenuTriggerFor]="langMenu" class="lang-button">
           <span class="flag-icon">{{ getCurrentLanguage()?.flag }}</span>
@@ -53,9 +63,8 @@
       </div>
     </div>
 
-    <!-- NAVIGATION MENU -->
     <mat-nav-list>
-      <!-- CATALOG SECTION -->
+
       <div class="nav-section-title">
         {{ 'ADMIN_PANEL.MENU.CATALOG' | translate }}
       </div>
@@ -65,6 +74,26 @@
         <span matListItemTitle>{{ 'ADMIN_PANEL.MENU.CATEGORIES' | translate }}</span>
       </a>
 
+      <a mat-list-item routerLink="/admin/brands" routerLinkActive="active">
+        <mat-icon matListItemIcon>branding_watermark</mat-icon>
+        <span matListItemTitle>{{ 'ADMIN_PANEL.MENU.BRANDS' | translate }}</span>
+      </a>
+
+      <a mat-list-item routerLink="/admin/stores" routerLinkActive="active">
+        <mat-icon matListItemIcon>storefront</mat-icon>
+        <span matListItemTitle>{{ 'Prodavnice' | translate }}</span>
+      </a>
+
+      <a mat-list-item routerLink="/admin/branches" routerLinkActive="active">
+        <mat-icon matListItemIcon>location_on</mat-icon>
+        <span matListItemTitle>{{ 'Poslovnice' | translate }}</span>
+      </a>
+
+      <a mat-list-item routerLink="/admin/cities" routerLinkActive="active">
+        <mat-icon matListItemIcon>location_city</mat-icon>
+        <span matListItemTitle>{{ 'Gradovi' | translate }}</span>
+      </a>
+
       <a mat-list-item routerLink="/admin/products" routerLinkActive="active">
         <mat-icon matListItemIcon>inventory_2</mat-icon>
         <span matListItemTitle>{{ 'ADMIN_PANEL.MENU.PRODUCTS' | translate }}</span>
@@ -72,7 +101,6 @@
 
       <mat-divider></mat-divider>
 
-      <!-- ORDERS SECTION -->
       <div class="nav-section-title">
         {{ 'ADMIN_PANEL.MENU.ORDERS_SECTION' | translate }}
       </div>
@@ -84,7 +112,6 @@
 
       <mat-divider></mat-divider>
 
-      <!-- SYSTEM SECTION -->
       <div class="nav-section-title">
         {{ 'ADMIN_PANEL.MENU.SYSTEM' | translate }}
       </div>
@@ -94,7 +121,6 @@
         <span matListItemTitle>{{ 'ADMIN_PANEL.MENU.SETTINGS' | translate }}</span>
       </a>
 
-      <!-- LOGOUT -->
       <a mat-list-item routerLink="/auth/logout" routerLinkActive="active" class="logout-item">
         <mat-icon matListItemIcon>logout</mat-icon>
         <span matListItemTitle>{{ 'ADMIN_PANEL.MENU.LOGOUT' | translate }}</span>
@@ -102,7 +128,6 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- MAIN CONTENT -->
   <mat-sidenav-content class="main-content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>

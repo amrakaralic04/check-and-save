@@ -1,6 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Subscription } from 'rxjs';
+
 import { AuthFacadeService } from '../../../core/services/auth/auth-facade.service';
 
 @Component({
@@ -17,27 +19,42 @@ import { AuthFacadeService } from '../../../core/services/auth/auth-facade.servi
     ])
   ]
 })
-export class LogoutComponent implements OnInit {
+export class LogoutComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private auth = inject(AuthFacadeService);
+  private logoutSubscription?: Subscription;
+  private countdownIntervalId?: ReturnType<typeof setInterval>;
 
   countdownSeconds = 2;
 
   ngOnInit(): void {
-    // Call logout (handles API call + clears state)
-    this.auth.logout().subscribe({
+    this.logoutSubscription = this.auth.logout().subscribe({
       next: () => this.startCountdown(),
-      error: () => this.startCountdown() // Even if API fails, clear local state
+      error: () => this.startCountdown()
     });
+  }
+  ngOnDestroy(): void {
+    this.logoutSubscription?.unsubscribe();
+
+    if (this.countdownIntervalId) {
+      clearInterval(this.countdownIntervalId);
+      this.countdownIntervalId = undefined;
+    }
   }
 
   private startCountdown(): void {
-    const intervalId = setInterval(() => {
-      this.countdownSeconds--;
+      if (this.countdownIntervalId) {
+        return;
+      }
 
-      if (this.countdownSeconds <= 0) {
-        clearInterval(intervalId);
-        this.router.navigate(['/login']);
+      this.countdownIntervalId = setInterval(() => {
+        this.countdownSeconds--;
+
+
+        if (this.countdownSeconds <= 0 && this.countdownIntervalId) {
+          clearInterval(this.countdownIntervalId);
+          this.countdownIntervalId = undefined;
+          this.router.navigate(['/auth/login'], { replaceUrl: true });
       }
     }, 1000);
   }

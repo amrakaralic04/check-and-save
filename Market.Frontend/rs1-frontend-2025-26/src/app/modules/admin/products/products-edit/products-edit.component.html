@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="header-card">
+    <div class="header-content">
+      <h1>Uredi Proizvod</h1>
+      <p *ngIf="dateAddedLabel" class="header-subtitle">
+        Datum dodavanja: {{ dateAddedLabel | date: 'dd.MM.yyyy' }}
+      </p>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Čuvanje podataka...</p>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Naziv proizvoda *</mat-label>
+        <input matInput formControlName="name" placeholder="npr. iPhone 15" />
+        <mat-icon matSuffix>inventory_2</mat-icon>
+        <mat-error *ngIf="hasError('name')">{{ getErrorMessage('name') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opis proizvoda *</mat-label>
+        <textarea matInput rows="5" formControlName="description" placeholder="Unesite opis proizvoda"></textarea>
+        <mat-icon matSuffix>description</mat-icon>
+        <mat-error *ngIf="hasError('description')">{{ getErrorMessage('description') }}</mat-error>
+      </mat-form-field>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Kategorija *</mat-label>
+          <mat-select formControlName="categoryEntityId">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-error *ngIf="hasError('categoryEntityId')">{{ getErrorMessage('categoryEntityId') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Brend *</mat-label>
+          <mat-select formControlName="brandEntityId">
+            <mat-option *ngFor="let brand of brands" [value]="brand.id">
+              {{ brand.name }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>branding_watermark</mat-icon>
+          <mat-error *ngIf="hasError('brandEntityId')">{{ getErrorMessage('brandEntityId') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Prodavnica *</mat-label>
+          <mat-select formControlName="storeEntityId">
+            <mat-option *ngFor="let store of stores" [value]="store.id">
+              {{ store.name }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>storefront</mat-icon>
+          <mat-error *ngIf="hasError('storeEntityId')">{{ getErrorMessage('storeEntityId') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Poslovnica *</mat-label>
+          <mat-select formControlName="branchEntityId">
+            <mat-option *ngFor="let branch of filteredBranches" [value]="branch.id">
+              {{ branch.address }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>location_on</mat-icon>
+          <mat-error *ngIf="hasError('branchEntityId')">{{ getErrorMessage('branchEntityId') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- ── Image Upload Section ── -->
+      <div class="image-section">
+        <div class="image-section__label">Slika proizvoda</div>
+
+        <!-- Trenutna slika -->
+        <div class="image-preview" *ngIf="currentImageUrl && !previewUrl">
+          <img [src]="currentImageUrl" alt="Trenutna slika" />
+          <span class="image-preview__caption">Trenutna slika</span>
+        </div>
+
+        <!-- Preview nove slike -->
+        <div class="image-preview image-preview--new" *ngIf="previewUrl">
+          <img [src]="previewUrl" alt="Nova slika" />
+          <span class="image-preview__caption">Nova slika (nije još uploadovana)</span>
+        </div>
+
+        <div class="image-controls">
+          <label class="btn-select-file" for="imageInput">
+            <mat-icon>attach_file</mat-icon>
+            Odaberi sliku
+          </label>
+          <input
+            id="imageInput"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            (change)="onFileSelected($event)"
+            style="display: none"
+          />
+
+          <button
+            type="button"
+            mat-raised-button
+            class="btn-upload"
+            [disabled]="!selectedFile || isUploading"
+            (click)="onUploadImage()">
+            <mat-icon>cloud_upload</mat-icon>
+            {{ isUploading ? 'Uploadovanje...' : 'Uploaduj sliku' }}
+          </button>
+        </div>
+
+        <p class="image-hint">Dozvoljeni formati: JPG, PNG, WEBP. Max veličina: 10MB. Slika će biti automatski kompresovana.</p>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" mat-stroked-button (click)="onCancel()" [disabled]="isLoading">
+          <mat-icon>close</mat-icon>
+          Otkaži
+        </button>
+        <button type="submit" mat-raised-button [disabled]="form.invalid || isLoading">
+          <mat-icon>save</mat-icon>
+          Sačuvaj izmjene
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

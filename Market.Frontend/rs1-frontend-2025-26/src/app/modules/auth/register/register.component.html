@@ -1,1 +1,112 @@
-<p>register works!</p>
+<div class="auth-inner">
+  <div class="head">
+    <h1 class="title">Registracija</h1>
+    <p class="sub">Kreiraj svoj nalog da možeš koristiti FIT Market</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ errorMessage }}</span>
+  </div>
+
+  <div *ngIf="successMessage" class="success-message">
+    <mat-icon>check_circle</mat-icon>
+    <span>{{ successMessage }}</span>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Ime</mat-label>
+        <input matInput formControlName="firstName" placeholder="Unesi ime" autocomplete="given-name" />
+        <mat-icon matPrefix>badge</mat-icon>
+        <mat-error *ngIf="form.get('firstName')?.hasError('required')">Ime je obavezno</mat-error>
+        <mat-error *ngIf="form.get('firstName')?.hasError('minlength')">Ime je prekratko</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Prezime</mat-label>
+        <input matInput formControlName="lastName" placeholder="Unesi prezime" autocomplete="family-name" />
+        <mat-icon matPrefix>badge</mat-icon>
+        <mat-error *ngIf="form.get('lastName')?.hasError('required')">Prezime je obavezno</mat-error>
+        <mat-error *ngIf="form.get('lastName')?.hasError('minlength')">Prezime je prekratko</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="vasa.email@primjer.com" autocomplete="email" />
+      <mat-icon matPrefix>mail</mat-icon>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">Email je obavezan</mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">Unesite validan email</mat-error>
+    </mat-form-field>
+
+    <div class="gender-card">
+      <div class="gender-title">Spol</div>
+      <mat-radio-group class="gender-options" formControlName="gender" aria-label="Odaberi spol">
+        <mat-radio-button value="female">Ženski</mat-radio-button>
+        <mat-radio-button value="male">Muški</mat-radio-button>
+      </mat-radio-group>
+      <small class="gender-error" *ngIf="form.get('gender')?.touched && form.get('gender')?.hasError('required')">
+        Spol je obavezan
+      </small>
+    </div>
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Lozinka</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        [type]="hidePassword ? 'password' : 'text'"
+        placeholder="••••••••"
+        autocomplete="new-password"
+      />
+      <mat-icon matPrefix>lock</mat-icon>
+      <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="form.get('password')?.hasError('required')">Lozinka je obavezna</mat-error>
+      <mat-error *ngIf="form.get('password')?.hasError('minlength')">Lozinka mora imati najmanje 6 znakova</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Potvrdi lozinku</mat-label>
+      <input
+        matInput
+        formControlName="confirmPassword"
+        [type]="hideConfirmPassword ? 'password' : 'text'"
+        placeholder="••••••••"
+        autocomplete="new-password"
+      />
+      <mat-icon matPrefix>lock</mat-icon>
+      <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword">
+        <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">Potvrda lozinke je obavezna</mat-error>
+      <mat-error *ngIf="form.errors?.['passwordsMismatch']">Lozinke se ne podudaraju</mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="submit-button"
+      [disabled]="form.invalid || isLoading"
+    >
+      <ng-container *ngIf="!isLoading; else loadingTpl">
+        <mat-icon>person_add</mat-icon>
+        Registruj se
+      </ng-container>
+      <ng-template #loadingTpl>
+        <mat-progress-spinner mode="indeterminate" diameter="18" strokeWidth="3"></mat-progress-spinner>
+        <span>Registracija u toku...</span>
+      </ng-template>
+    </button>
+
+    <div class="login-prompt">
+      <span>Već imaš nalog?</span>
+      <a routerLink="/auth/login" class="login-link">Prijavi se</a>
+    </div>
+  </form>
+</div>

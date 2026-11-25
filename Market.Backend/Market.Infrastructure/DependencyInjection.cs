@@ -1,6 +1,7 @@
 ﻿using Market.Application.Abstractions;
 using Market.Infrastructure.Common;
 using Market.Infrastructure.Database;
+using Market.Infrastructure.Services;
 using Market.Shared.Constants;
 using Market.Shared.Options;
 using Microsoft.Extensions.Configuration;
@@ -52,6 +53,14 @@ public static class DependencyInjection
 
         // TimeProvider (if used in handlers/services)
         services.AddSingleton<TimeProvider>(TimeProvider.System);
+
+        services.AddOptions<SupabaseSettings>()
+        .Bind(configuration.GetSection(SupabaseSettings.SectionName))
+        .ValidateDataAnnotations()
+        .ValidateOnStart();
+
+        services.AddHttpClient("Supabase");
+        services.AddScoped<IStorageService, SupabaseStorageService>();
 
         return services;
     }

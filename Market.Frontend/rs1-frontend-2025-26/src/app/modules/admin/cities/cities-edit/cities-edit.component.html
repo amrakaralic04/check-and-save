@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="header-card">
+    <h1>Uredi Grad</h1>
+  </div>
+
+  <div class="form-card">
+    <div *ngIf="isLoading && !form" class="loading-overlay">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Učitavanje podataka...</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Naziv grada *</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="npr. Sarajevo"
+        />
+        <mat-icon matSuffix>location_city</mat-icon>
+        <mat-error *ngIf="hasError('name')">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Poštanski broj *</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="postalCode"
+          placeholder="npr. 71000"
+        />
+        <mat-icon matSuffix>local_post_office</mat-icon>
+        <mat-error *ngIf="hasError('postalCode')">
+          {{ getErrorMessage('postalCode') }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button type="button" mat-stroked-button (click)="onCancel()" [disabled]="isLoading">
+          <mat-icon>close</mat-icon>
+          Otkaži
+        </button>
+
+        <button
+          type="submit"
+          mat-raised-button
+          [disabled]="form.invalid || isLoading"
+        >
+          <mat-icon>save</mat-icon>
+          Sačuvaj izmjene
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

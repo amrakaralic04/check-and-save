@@ -30,5 +30,5 @@ public sealed class AppCurrentUser(IHttpContextAccessor httpContextAccessor)
         _user?.FindFirstValue("is_manager")?.Equals("true", StringComparison.OrdinalIgnoreCase) ?? false;
 
     public bool IsPublicUser =>
-        _user?.FindFirstValue("is_employee")?.Equals("true", StringComparison.OrdinalIgnoreCase) ?? false;
+     _user?.FindFirstValue("is_public_user")?.Equals("true", StringComparison.OrdinalIgnoreCase) ?? false;
 }

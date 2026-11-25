@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="header-card">
+    <h1>Uredi Poslovnicu</h1>
+  </div>
+
+  <div class="form-card">
+    <div *ngIf="isLoading && !form" class="loading-overlay">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Učitavanje podataka...</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading || form">
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Prodavnica *</mat-label>
+        <mat-select formControlName="storeEntityId">
+          <mat-option *ngFor="let store of stores" [value]="store.id">
+            {{ store.name }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>storefront</mat-icon>
+        <mat-error *ngIf="hasError('storeEntityId')">
+          {{ getErrorMessage('storeEntityId') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Grad *</mat-label>
+        <mat-select formControlName="cityEntityId">
+          <mat-option *ngFor="let city of cities" [value]="city.id">
+            {{ city.name }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>location_city</mat-icon>
+        <mat-error *ngIf="hasError('cityEntityId')">
+          {{ getErrorMessage('cityEntityId') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Adresa *</mat-label>
+        <input
+          matInput
+          formControlName="address"
+          placeholder="npr. Zmaja od Bosne 12"
+        />
+        <mat-icon matSuffix>location_on</mat-icon>
+        <mat-error *ngIf="hasError('address')">
+          {{ getErrorMessage('address') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Kontakt telefon *</mat-label>
+        <input
+          matInput
+          formControlName="contact"
+          placeholder="npr. +387 33 123 456"
+        />
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="hasError('contact')">
+          {{ getErrorMessage('contact') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email adresa *</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="npr. kontakt@poslovnica.ba"
+        />
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="hasError('email')">
+          {{ getErrorMessage('email') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="isActive" class="status-toggle">
+        Aktivna poslovnica
+      </mat-slide-toggle>
+
+      <div class="form-actions">
+        <button type="button" mat-stroked-button (click)="onCancel()" [disabled]="isLoading">
+          <mat-icon>close</mat-icon>
+          Otkaži
+        </button>
+
+        <button
+          type="submit"
+          mat-raised-button
+          [disabled]="form.invalid || isLoading"
+        >
+          <mat-icon>save</mat-icon>
+          Sačuvaj izmjene
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,63 +1,130 @@
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+
+
+
+$custom-green-palette: (
+  0: #000000,
+  10: #00210d,
+  20: #003919,
+  25: #004621,
+  30: #00522a,
+  35: #005f33,
+  40: #0f3d2e,
+  50: #1f5a45,
+  60: #2d7159,
+  70: #3d8869,
+  80: #4ea07a,
+  90: #a5d6c0,
+  95: #c9e8d8,
+  98: #e9f5ef,
+  99: #f3faf6,
+  100: #ffffff,
+);
+
+$custom-secondary-palette: (
+  0: #000000,
+  10: #1f1b13,
+  20: #352f22,
+  25: #413a2c,
+  30: #4d4637,
+  35: #595142,
+  40: #665d4d,
+  50: #807665,
+  60: #9a8f7d,
+  70: #b5aa97,
+  80: #cdbb9a,
+  90: #d9c9ad,
+  95: #ebe0cc,
+  98: #f6f3ec,
+  99: #faf8f2,
+  100: #ffffff,
+);
+
 
 html {
   @include mat.theme((
     color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      primary: $custom-green-palette,
+      secondary: $custom-secondary-palette,
+      tertiary: $custom-green-palette,
     ),
     typography: Roboto,
     density: 0,
   ));
 }
-
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
+:root {
+  --app-bg-color: #f6f3ec;
+  --app-page-bg-color: #f3efe6;
+  --app-surface-color: #ffffff;
+  --app-primary-color: #0f3d2e;
+  --app-header-bg-color: #0f3d2e;
+  --app-header-text-color: #ffffff;
+  --app-primary-hover-color: #1f5a45;
+  --app-primary-dark-color: #0b2e23;
+  --app-on-primary-color: #ffffff;
+  --app-primary-tint-color: rgba(15, 61, 46, 0.08);
+  --app-image-surface-color: #f7efe2;
+  --app-success-bg-color: #edf7f1;
+  --app-secondary-color: #cdbb9a;
+  --app-text-color: #143126;
+  --app-body-text-color: #1f2a24;
+  --app-muted-text-color: #5b6b63;
+  --app-border-color: rgba(205, 187, 154, 0.55);
+  --app-card-shadow: rgba(15, 61, 46, 0.12);
+  --app-strong-shadow: rgba(15, 61, 46, 0.22);
   color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
-  margin: 0;
 }
 
+:root.dark-theme {
+  --app-bg-color: #101814;
+  --app-page-bg-color: #0b1410;
+  --app-surface-color: #17231d;
+  --app-primary-color: #a5d6c0;
+  --app-header-bg-color: #07110d;
+  --app-header-text-color: #ffffff;
+  --app-primary-hover-color: #c9e8d8;
+  --app-primary-dark-color: #4ea07a;
+  --app-on-primary-color: #062016;
+  --app-primary-tint-color: rgba(165, 214, 192, 0.12);
+  --app-image-surface-color: #203229;
+  --app-success-bg-color: rgba(165, 214, 192, 0.12);
+  --app-secondary-color: #d9c9ad;
+  --app-text-color: #edf7f1;
+  --app-body-text-color: #edf7f1;
+  --app-muted-text-color: #b7c8bf;
+  --app-border-color: rgba(165, 214, 192, 0.26);
+  --app-card-shadow: rgba(0, 0, 0, 0.32);
+  --app-strong-shadow: rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
 
-html, body {
+html {
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 body {
+  min-height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color-scheme: inherit;
+  background-color: var(--app-bg-color);
+  color: var(--app-body-text-color);
+  font: var(--mat-sys-body-medium);
 }
 
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+$primary-color: #0f3d2e;
+$primary-light: #1f5a45;
+$primary-dark: #0b2e23;
+$secondary-color: #cdbb9a;
 
 
-// Add this to your global styles.scss
-
-// ===========================
-// TOASTER / SNACKBAR STYLES
-// ===========================
 
 .snackbar-success {
-  background-color: #4caf50 !important;
+  background-color: $primary-color !important;
   color: white !important;
 
   .mat-mdc-snack-bar-label {
@@ -65,12 +132,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
   .mat-mdc-button {
-    color: white !important;
+    color: $secondary-color !important;
   }
 }
 
 .snackbar-error {
-  background-color: #f44336 !important;
+  background-color: #ef5350 !important;
   color: white !important;
 
   .mat-mdc-snack-bar-label {
@@ -83,7 +150,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .snackbar-warning {
-  background-color: #ff9800 !important;
+  background-color: #ffa726 !important;
   color: white !important;
 
   .mat-mdc-snack-bar-label {
@@ -96,7 +163,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .snackbar-info {
-  background-color: #2196f3 !important;
+  background-color: $primary-color !important;
   color: white !important;
 
   .mat-mdc-snack-bar-label {
@@ -104,6 +171,481 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
   .mat-mdc-button {
-    color: white !important;
+    color: $secondary-color !important;
   }
+}
+
+
+.paginator-bar .paginator-actions .nav-buttons .page-indicator {
+  background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%) !important;
+  box-shadow: 0 2px 8px rgba(15, 61, 46, 0.3) !important;
+
+  &:hover {
+    background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%) !important;
+    box-shadow: 0 4px 12px rgba(15, 61, 46, 0.4) !important;
+  }
+}
+
+.mat-mdc-paginator {
+  .mat-mdc-icon-button {
+    color: $primary-color !important;
+
+    &:hover:not([disabled]) {
+      background-color: rgba(15, 61, 46, 0.1) !important;
+    }
+  }
+
+  .mat-mdc-button:not(.mat-mdc-icon-button) {
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+
+    &:hover {
+      background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%) !important;
+      box-shadow: 0 4px 12px rgba(15, 61, 46, 0.3) !important;
+    }
+  }
+}
+
+app-fit-paginator-bar {
+  .page-indicator {
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%) !important;
+    box-shadow: 0 2px 8px rgba(15, 61, 46, 0.3) !important;
+
+    &:hover {
+      background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%) !important;
+      box-shadow: 0 4px 12px rgba(15, 61, 46, 0.4) !important;
+    }
+  }
+
+  .mat-mdc-icon-button {
+    color: $primary-color !important;
+
+    &:hover:not([disabled]) {
+      background-color: rgba(15, 61, 46, 0.1) !important;
+    }
+  }
+}
+
+[class*="paginator"] {
+  .page-indicator,
+  [class*="page-indicator"] {
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%) !important;
+    box-shadow: 0 2px 8px rgba(15, 61, 46, 0.3) !important;
+
+    &:hover {
+      background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%) !important;
+      box-shadow: 0 4px 12px rgba(15, 61, 46, 0.4) !important;
+    }
+  }
+}
+
+
+
+.mat-mdc-raised-button.mat-primary {
+  background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%) !important;
+  color: white !important;
+
+  &:hover:not([disabled]) {
+    background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%) !important;
+    box-shadow: 0 4px 12px rgba(15, 61, 46, 0.3) !important;
+  }
+}
+
+.mat-mdc-button.mat-primary {
+  color: $primary-color !important;
+}
+
+.mat-mdc-icon-button.mat-primary {
+  color: $primary-color !important;
+}
+
+
+
+.mat-mdc-form-field.mat-focused {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: $primary-color !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: $primary-color !important;
+  }
+}
+
+.mat-mdc-form-field {
+  .mat-mdc-form-field-icon-suffix {
+    color: $primary-color !important;
+  }
+}
+
+
+
+.mat-mdc-checkbox.mat-primary {
+  --mdc-checkbox-selected-icon-color: #{$primary-color};
+  --mdc-checkbox-selected-hover-icon-color: #{$primary-dark};
+  --mdc-checkbox-selected-focus-icon-color: #{$primary-color};
+  --mdc-checkbox-selected-pressed-icon-color: #{$primary-dark};
+}
+
+.mat-mdc-radio-button.mat-primary {
+  --mdc-radio-selected-icon-color: #{$primary-color};
+  --mdc-radio-selected-hover-icon-color: #{$primary-dark};
+  --mdc-radio-selected-focus-icon-color: #{$primary-color};
+  --mdc-radio-selected-pressed-icon-color: #{$primary-dark};
+}
+
+
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: #{$primary-color};
+  --mdc-slider-focus-handle-color: #{$primary-dark};
+  --mdc-slider-hover-handle-color: #{$primary-dark};
+  --mdc-slider-active-track-color: #{$primary-color};
+  --mdc-slider-inactive-track-color: rgba(15, 61, 46, 0.3);
+}
+
+.mat-mdc-progress-bar.mat-primary {
+  --mdc-linear-progress-active-indicator-color: #{$primary-color};
+}
+
+.mat-mdc-progress-spinner.mat-primary {
+  --mdc-circular-progress-active-indicator-color: #{$primary-color};
+}
+
+
+
+.mat-mdc-tab-group.mat-primary {
+  --mat-tab-header-active-label-text-color: #{$primary-color};
+  --mat-tab-header-active-ripple-color: #{$primary-color};
+  --mat-tab-header-active-focus-label-text-color: #{$primary-dark};
+  --mat-tab-header-active-hover-label-text-color: #{$primary-dark};
+}
+
+
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-dark;
+    text-decoration: underline;
+  }
+}
+
+
+
+:root {
+  --admin-font-display: var(--mat-sys-headline-medium);
+  --admin-font-title: var(--mat-sys-title-large);
+  --admin-font-subtitle: var(--mat-sys-title-medium);
+  --admin-font-body-strong: var(--mat-sys-body-large);
+  --admin-font-body: var(--mat-sys-body-medium);
+  --admin-font-label: var(--mat-sys-label-large);
+  --admin-font-label-strong: var(--mat-sys-label-large);
+
+  --admin-btn-height: 52px;
+  --admin-btn-radius: 14px;
+  --admin-btn-padding: 0 24px;
+  --admin-btn-transition: all 0.2s ease;
+  --admin-btn-shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.15);
+  --admin-btn-add-bg: #cdbb9a;
+  --admin-btn-add-bg-hover: #d4c5a8;
+  --admin-btn-add-fg: #0f3d2e;
+}
+
+.admin-page {
+  .logo-text {
+    font: var(--admin-font-title);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .link,
+  .search-field input,
+  .loading-state p,
+  .error-state p,
+  .mat-mdc-paginator-page-size-label,
+  .mat-mdc-paginator-range-label,
+  .mat-mdc-cell {
+    font: var(--admin-font-body);
+  }
+
+  .btn-add,
+  .btn-reset,
+  .form-actions button {
+    height: var(--admin-btn-height) !important;
+    padding: var(--admin-btn-padding) !important;
+    border-radius: var(--admin-btn-radius) !important;
+    font: var(--admin-font-label) !important;
+    font-weight: 700 !important;
+    transition: var(--admin-btn-transition) !important;
+  }
+
+  .btn-add {
+    background: var(--admin-btn-add-bg) !important;
+    color: var(--admin-btn-add-fg) !important;
+  }
+
+  .btn-add:hover {
+    background: var(--admin-btn-add-bg-hover) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--admin-btn-shadow-hover);
+  }
+
+  .form-actions button[mat-raised-button] {
+    font-weight: 700 !important;
+  }
+
+  .form-actions button[mat-stroked-button] {
+    font-weight: 600 !important;
+  }
+
+  .mat-mdc-header-cell,
+  th {
+    font: var(--admin-font-label-strong);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+
+.admin-page {
+  .topbar-inner {
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .topbar-left {
+    gap: 24px;
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  .topbar-links {
+    gap: 2px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .link {
+    padding: 7px 10px;
+    font-size: 13px;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .topbar-right {
+    background: rgba(8, 41, 31, 0.45);
+    border: 1px solid rgba(205, 187, 154, 0.35);
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.admin-page .topbar-right {
+  .field-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  .topbar-label {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding-left: 4px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .mat-mdc-form-field {
+    width: 100%;
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none !important;
+    }
+
+    .mdc-floating-label,
+    .mat-mdc-floating-label,
+    .mdc-floating-label--float-above {
+      display: none !important;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      background: #f3efe6 !important;
+      border-radius: 10px !important;
+      height: 42px !important;
+      padding: 0 10px !important;
+    }
+
+    .mat-mdc-form-field-infix {
+      min-height: 42px !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      display: flex;
+      align-items: center;
+    }
+
+    input,
+    .mat-mdc-select-value,
+    .mat-mdc-select-value-text {
+      color: #0f172a !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+    }
+
+    .mat-mdc-select-arrow,
+    .mat-mdc-form-field-icon-suffix {
+      color: #6b7280 !important;
+    }
+  }
+
+  input::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+  }
+
+  .mat-mdc-select-placeholder {
+    color: #94a3b8 !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .admin-page .topbar-right {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-page {
+    .topbar-inner {
+      padding: 16px 20px !important;
+      gap: 12px;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .topbar-right {
+      width: 100%;
+      flex-wrap: wrap;
+      padding: 12px;
+    }
+
+    .topbar-right .field-wrapper {
+      flex: 1 1 calc(50% - 10px);
+      min-width: 140px;
+    }
+
+    .topbar-right .btn-wrapper {
+      flex: 1 1 100%;
+      justify-content: flex-start;
+    }
+
+    .content {
+      padding: 20px !important;
+    }
+  }
+}
+app-root > div,
+router-outlet + * {
+  background: var(--app-bg-color);
+  color: var(--app-body-text-color);
+}
+
+.mat-mdc-card,
+.mat-mdc-menu-panel,
+.mat-mdc-dialog-surface,
+.mat-mdc-table,
+.mat-mdc-paginator {
+  background-color: var(--app-surface-color) !important;
+  color: var(--app-body-text-color) !important;
+}
+
+.mat-mdc-header-cell,
+.mat-mdc-cell,
+.mat-mdc-row,
+.mat-mdc-paginator-container,
+.mat-mdc-select-value,
+.mat-mdc-input-element {
+  color: var(--app-body-text-color) !important;
+}
+
+:root.dark-theme {
+  .admin-page,
+  .admin-page .content,
+  .admin-page .table-container,
+  .admin-page .filter-section,
+  .admin-page .empty-state,
+  .admin-page .loading-state,
+  .admin-page .error-state,
+  .admin-page .mat-mdc-table,
+  .admin-page .mat-mdc-paginator {
+    background: var(--app-page-bg-color) !important;
+    color: var(--app-body-text-color) !important;
+  }
+
+  .admin-page .card,
+  .admin-page .mat-mdc-row,
+  .admin-page .mat-mdc-header-row,
+  .admin-page .form-card,
+  .admin-page .details-card {
+    background: var(--app-surface-color) !important;
+    border-color: var(--app-border-color) !important;
+    color: var(--app-body-text-color) !important;
+  }
+
+  .admin-page h1,
+  .admin-page h2,
+  .admin-page h3,
+  .admin-page p,
+  .admin-page label,
+  .admin-page .mat-mdc-cell,
+  .admin-page .mat-mdc-header-cell,
+  .admin-page .mat-mdc-paginator-range-label,
+  .admin-page .mat-mdc-paginator-page-size-label {
+    color: var(--app-body-text-color) !important;
+  }
+}
+
+.mat-datepicker-content {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(15, 61, 46, 0.15) !important;
+}
+
+.mat-calendar {
+  background: #ffffff !important;
 }

@@ -57,7 +57,17 @@ ng build             # Build za produkciju
 ```
 
 ---
+## 🧪 Smoke test checklist (Registracija → Prijava)
 
+- [ ] Otvori aplikaciju na `http://localhost:4200`.
+- [ ] Idi na ekran za registraciju.
+- [ ] Unesi validne podatke za novog korisnika i potvrdi registraciju.
+- [ ] Provjeri da je prikazana potvrda uspješne registracije.
+- [ ] Idi na ekran za prijavu.
+- [ ] Prijavi se s novim korisničkim podacima.
+- [ ] Provjeri da je korisnik uspješno prijavljen i preusmjeren na početni ekran/dashboard.
+
+---
 
 ## 📸 Screenshotovi
 

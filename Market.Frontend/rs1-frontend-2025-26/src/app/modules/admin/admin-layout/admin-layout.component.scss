@@ -1,20 +1,27 @@
 // Colors
-$primary-color: #4976b5;
-$primary-light: #6b92c9;
-$primary-dark: #365a8f;
-$accent-color: #5b9bd5;
+$primary-color: #1f4d3a;
+$primary-light: #2f6b52;
+$primary-dark: #163a2c;
+$accent-color: #3c8466;
+
 $success-color: #66bb6a;
 $error-color: #ef5350;
 $warning-color: #ffa726;
+
 $text-primary: #212121;
-$text-secondary: #757575;
+$text-secondary: #6b7f75;
 $text-light: #9e9e9e;
-$background-page: linear-gradient(135deg, #f0f5fb 0%, #e3ecf7 100%);
+
+$background-page: linear-gradient(135deg, #f3efe6 0%, #efe7d9 100%);
 $background-card: #ffffff;
-$border-color: #e3e8ef;
-$hover-color: #f5f8fc;
-$sidebar-bg: #ffffff;
+
+$border-color: rgba(31, 77, 58, 0.12);
+$hover-color: rgba(31, 77, 58, 0.06);
+
+$sidebar-bg: rgba(255, 255, 255, 0.92);
 $sidebar-width: 280px;
+
+$beige-accent: #cdbb9a;
 
 // Sidenav Container
 .sidenav-container {
@@ -22,23 +29,20 @@ $sidebar-width: 280px;
   width: 100%;
   background: $background-page;
 
-  // Sidebar
   .sidenav {
     width: $sidebar-width;
     background: $sidebar-bg;
     border-right: 1px solid $border-color;
-    box-shadow: 4px 0 16px rgba(73, 118, 181, 0.08);
+    box-shadow: 4px 0 16px rgba(22, 58, 44, 0.08);
     display: flex;
     flex-direction: column;
 
-    // Sidebar Header
     .sidebar-header {
       background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
       padding: 24px 20px;
       position: relative;
       overflow: hidden;
 
-      // Decorative elements
       &::before {
         content: '';
         position: absolute;
@@ -61,7 +65,59 @@ $sidebar-width: 280px;
         border-radius: 50%;
       }
 
-      // User Info
+      // =============================================
+      // BRAND LOGO — bež pozadina, zelena ikona
+      // identičan kao client home .brand-mark
+      // =============================================
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        background: $beige-accent;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        mat-icon {
+          color: $primary-dark;
+          font-size: 26px;
+          width: 26px;
+          height: 26px;
+        }
+      }
+
+      .brand-name {
+        font-size: 18px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.3px;
+        line-height: 1.1;
+      }
+
+      .brand-amp {
+        color: $beige-accent;
+      }
+
+      .brand-sub {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.65);
+        margin-top: 2px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+      // =============================================
+
       .user-info {
         display: flex;
         align-items: center;
@@ -73,7 +129,7 @@ $sidebar-width: 280px;
         .user-avatar {
           width: 56px;
           height: 56px;
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.18);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -125,34 +181,33 @@ $sidebar-width: 280px;
               }
 
               &.admin {
-                background: rgba(239, 83, 80, 0.2);
+                background: rgba(239, 83, 80, 0.18);
                 color: #ffffff;
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.28);
               }
 
               &.manager {
-                background: rgba(255, 167, 38, 0.2);
+                background: rgba(255, 167, 38, 0.18);
                 color: #ffffff;
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.28);
               }
 
               &.employee {
-                background: rgba(102, 187, 106, 0.2);
+                background: rgba(102, 187, 106, 0.18);
                 color: #ffffff;
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.28);
               }
             }
           }
         }
       }
 
-      // Language Selector
       .language-selector {
         position: relative;
         z-index: 1;
 
         .lang-button {
-          background: rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.14);
           border-radius: 12px;
           backdrop-filter: blur(10px);
           color: $background-card;
@@ -165,7 +220,7 @@ $sidebar-width: 280px;
           transition: all 0.3s ease;
 
           &:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.22);
           }
 
           .flag-icon {
@@ -179,31 +234,19 @@ $sidebar-width: 280px;
       }
     }
 
-    // Navigation Menu
     mat-nav-list {
       flex: 1;
       overflow-y: auto;
       padding: 16px 12px;
 
-      // Custom scrollbar
-      &::-webkit-scrollbar {
-        width: 6px;
-      }
-
-      &::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
+      &::-webkit-scrollbar { width: 6px; }
+      &::-webkit-scrollbar-track { background: transparent; }
       &::-webkit-scrollbar-thumb {
-        background: rgba($primary-color, 0.2);
+        background: rgba($primary-color, 0.22);
         border-radius: 3px;
-
-        &:hover {
-          background: rgba($primary-color, 0.3);
-        }
+        &:hover { background: rgba($primary-color, 0.32); }
       }
 
-      // Section Title
       .nav-section-title {
         color: $text-secondary;
         font-size: 11px;
@@ -212,13 +255,9 @@ $sidebar-width: 280px;
         letter-spacing: 1px;
         padding: 16px 12px 8px;
         margin-top: 8px;
-
-        &:first-child {
-          margin-top: 0;
-        }
+        &:first-child { margin-top: 0; }
       }
 
-      // Navigation Items
       a[mat-list-item] {
         border-radius: 12px;
         margin-bottom: 4px;
@@ -235,7 +274,7 @@ $sidebar-width: 280px;
           top: 0;
           width: 0;
           height: 100%;
-          background: linear-gradient(90deg, $primary-color 0%, transparent 100%);
+          background: linear-gradient(90deg, rgba($primary-color, 0.65) 0%, transparent 100%);
           transition: width 0.3s ease;
         }
 
@@ -254,69 +293,45 @@ $sidebar-width: 280px;
 
         &:hover:not(.active) {
           background-color: $hover-color;
-
           mat-icon[matListItemIcon] {
             color: $primary-color;
             transform: translateX(4px);
           }
         }
 
-        // Active State
         &.active {
-          background: linear-gradient(
-            135deg,
-            rgba($primary-color, 0.15) 0%,
-            rgba($accent-color, 0.1) 100%
-          );
+          background: linear-gradient(135deg, rgba($primary-color, 0.14) 0%, rgba($accent-color, 0.09) 100%);
           color: $primary-color;
           font-weight: 600;
-          box-shadow: 0 2px 8px rgba($primary-color, 0.15);
+          box-shadow: 0 2px 8px rgba($primary-color, 0.14);
 
-          &::before {
-            width: 4px;
-          }
+          &::before { width: 4px; }
 
           mat-icon[matListItemIcon] {
             color: $primary-color;
             transform: scale(1.1);
           }
 
-          span[matListItemTitle] {
-            color: $primary-color;
-          }
+          span[matListItemTitle] { color: $primary-color; }
         }
 
-        // Logout Item
         &.logout-item {
           margin-top: auto;
           background-color: rgba($error-color, 0.05);
-          border: 1px solid rgba($error-color, 0.1);
+          border: 1px solid rgba($error-color, 0.12);
 
-          mat-icon[matListItemIcon] {
-            color: $error-color;
-          }
-
-          span[matListItemTitle] {
-            color: $error-color;
-          }
+          mat-icon[matListItemIcon] { color: $error-color; }
+          span[matListItemTitle] { color: $error-color; }
 
           &:hover {
-            background: linear-gradient(
-              135deg,
-              rgba($error-color, 0.15) 0%,
-              rgba($error-color, 0.1) 100%
-            );
+            background: linear-gradient(135deg, rgba($error-color, 0.15) 0%, rgba($error-color, 0.1) 100%);
             border-color: rgba($error-color, 0.3);
             transform: translateX(4px);
-
-            mat-icon[matListItemIcon] {
-              transform: translateX(4px) rotate(-10deg);
-            }
+            mat-icon[matListItemIcon] { transform: translateX(4px) rotate(-10deg); }
           }
         }
       }
 
-      // Divider
       mat-divider {
         margin: 16px 0;
         background-color: $border-color;
@@ -324,37 +339,25 @@ $sidebar-width: 280px;
     }
   }
 
-  // Main Content
   .main-content {
-    background: linear-gradient(135deg, #f0f5fb 0%, #e3ecf7 100%);
+    background: $background-page;
     min-height: 100vh;
     overflow-y: auto;
 
-    // Custom scrollbar
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #e3ecf7;
-    }
-
+    &::-webkit-scrollbar { width: 8px; }
+    &::-webkit-scrollbar-track { background: rgba(31, 77, 58, 0.06); }
     &::-webkit-scrollbar-thumb {
-      background: rgba($primary-color, 0.3);
+      background: rgba($primary-color, 0.26);
       border-radius: 4px;
-
-      &:hover {
-        background: rgba($primary-color, 0.5);
-      }
+      &:hover { background: rgba($primary-color, 0.42); }
     }
   }
 }
 
-// Language Menu
 .mat-mdc-menu-panel {
   max-width: 240px !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 24px rgba(73, 118, 181, 0.15) !important;
+  box-shadow: 0 8px 24px rgba(22, 58, 44, 0.15) !important;
 
   .mat-mdc-menu-content {
     padding: 8px !important;
@@ -368,18 +371,10 @@ $sidebar-width: 280px;
       gap: 12px;
       transition: all 0.2s ease;
 
-      &:last-child {
-        margin-bottom: 0;
-      }
+      &:last-child { margin-bottom: 0; }
 
-      .flag-icon {
-        font-size: 20px;
-      }
-
-      span {
-        font-size: 14px;
-        font-weight: 500;
-      }
+      .flag-icon { font-size: 20px; }
+      span { font-size: 14px; font-weight: 500; }
 
       .check-icon {
         margin-left: auto;
@@ -390,23 +385,16 @@ $sidebar-width: 280px;
       }
 
       &.active-lang {
-        background: linear-gradient(
-          135deg,
-          rgba($primary-color, 0.1) 0%,
-          rgba($accent-color, 0.05) 100%
-        );
+        background: linear-gradient(135deg, rgba($primary-color, 0.1) 0%, rgba($accent-color, 0.06) 100%);
         color: $primary-color;
         font-weight: 600;
       }
 
-      &:hover {
-        background-color: $hover-color;
-      }
+      &:hover { background-color: $hover-color; }
     }
   }
 }
 
-// Responsive Design
 @media (max-width: 1024px) {
   .sidenav-container {
     .sidenav {
@@ -419,33 +407,18 @@ $sidebar-width: 280px;
           .user-avatar {
             width: 48px;
             height: 48px;
-
-            mat-icon {
-              font-size: 30px;
-              width: 30px;
-              height: 30px;
-            }
+            mat-icon { font-size: 30px; width: 30px; height: 30px; }
           }
-
-          .user-details .user-email {
-            font-size: 13px;
-          }
+          .user-details .user-email { font-size: 13px; }
         }
       }
 
       mat-nav-list {
         padding: 12px 8px;
-
         a[mat-list-item] {
           height: 44px;
-
-          mat-icon[matListItemIcon] {
-            margin-right: 12px;
-          }
-
-          span[matListItemTitle] {
-            font-size: 13px;
-          }
+          mat-icon[matListItemIcon] { margin-right: 12px; }
+          span[matListItemTitle] { font-size: 13px; }
         }
       }
     }
@@ -454,71 +427,13 @@ $sidebar-width: 280px;
 
 @media (max-width: 768px) {
   .sidenav-container {
-    .sidenav {
-      position: fixed;
-      z-index: 1000;
-    }
+    .sidenav { position: fixed; z-index: 1000; }
   }
 }
 
-// Animations
 @keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-.sidenav {
-  animation: slideIn 0.3s ease-out;
-}
-
-// Dark Mode Support (optional)
-@media (prefers-color-scheme: dark) {
-  .sidenav-container {
-    background: linear-gradient(135deg, #1a1f2e 0%, #242b3d 100%);
-
-    .sidenav {
-      background: #1e2530;
-      border-right-color: #3a4255;
-
-      .sidebar-header {
-        background: linear-gradient(
-          135deg,
-          darken($primary-color, 15%) 0%,
-          darken($primary-dark, 15%) 100%
-        );
-      }
-
-      mat-nav-list {
-        a[mat-list-item] {
-          color: #e4e7eb;
-
-          &:hover:not(.active) {
-            background-color: #2d3548;
-          }
-
-          &.active {
-            background: linear-gradient(
-              135deg,
-              rgba($primary-color, 0.25) 0%,
-              rgba($accent-color, 0.15) 100%
-            );
-          }
-        }
-
-        .nav-section-title {
-          color: #8891a0;
-        }
-      }
-    }
-
-    .main-content {
-      background: linear-gradient(135deg, #1a1f2e 0%, #242b3d 100%);
-    }
-  }
-}
+.sidenav { animation: slideIn 0.3s ease-out; }

@@ -1,0 +1,85 @@
+<div class="profile-page">
+  <header class="page-header">
+    <div>
+      <h1>Profil</h1>
+      <p>Pregled profila i brz pristup omiljenim stranicama.</p>
+    </div>
+
+    <div class="header-actions">
+      <div class="theme-switcher" aria-label="Odabir teme aplikacije">
+        <span>{{ themeLabel() }}</span>
+        <mat-slide-toggle
+          color="primary"
+          [checked]="themeService.isDarkTheme()"
+          (change)="onThemeToggle($event)"
+          aria-label="Uključi tamnu temu"
+        ></mat-slide-toggle>
+      </div>
+
+      <button class="btn outline" type="button" routerLink="/client/home">Nazad na početnu</button>
+    </div>
+  </header>
+
+  <section class="state-box" *ngIf="isLoading()">Učitavanje profila...</section>
+  <section class="state-box error" *ngIf="!isLoading() && loadError()">
+    {{ loadError() }}
+  </section>
+
+  <section class="profile-card" *ngIf="!isLoading() && !loadError()">
+    <div class="profile-actions">
+      <button class="edit-btn" type="button" routerLink="/client/profile/edit">Uredi profil</button>
+      <button
+        class="logout-btn"
+        type="button"
+        (click)="onLogout()"
+        [disabled]="isLoggingOut()"
+        *ngIf="isAuthenticated()"
+      >
+        {{ isLoggingOut() ? 'Odjava...' : 'Odjavi se' }}
+      </button>
+    </div>
+
+    <div class="avatar-wrap">
+      <img class="avatar" [src]="avatarImageSrc()" alt="Korisnički avatar" />
+    </div>
+
+    <div class="info">
+      <div class="field">
+        <span>Ime i prezime</span>
+        <strong>{{ fullName() }}</strong>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <span>Ime</span>
+          <strong>{{ profile()?.firstName || 'Nije uneseno' }}</strong>
+        </div>
+
+        <div class="field">
+          <span>Prezime</span>
+          <strong>{{ profile()?.lastName || 'Nije uneseno' }}</strong>
+        </div>
+      </div>
+
+      <div class="field">
+        <span>Email</span>
+        <strong>{{ userEmail() }}</strong>
+      </div>
+
+      <div class="field">
+        <span>Uloga</span>
+        <strong>{{ roleLabel() }}</strong>
+      </div>
+
+      <div class="status" [class.logged-out]="!isAuthenticated()">
+        {{ isAuthenticated() ? 'Ulogovan korisnik' : 'Prijavite se da vidite profil' }}
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-links">
+    <a routerLink="/client/favorites" class="quick-link">Omiljeni proizvodi</a>
+    <a routerLink="/client/map" class="quick-link">Mapa prodavnica</a>
+    <a routerLink="/auth/login" class="quick-link" *ngIf="!isAuthenticated()">Prijava</a>
+  </section>
+</div>

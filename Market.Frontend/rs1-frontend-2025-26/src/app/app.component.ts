@@ -1,5 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ThemeService } from './core/services/theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +12,18 @@ export class AppComponent implements OnInit {
   protected readonly title = signal('rs1-frontend-2025-26');
   currentLang: string = 'bs';
 
-  constructor(private translate: TranslateService) {
+  constructor(
+    private translate: TranslateService,
+    private themeService: ThemeService,
+  ) {
+    this.themeService.currentTheme();
     console.log('AppComponent constructor - initializing TranslateService');
 
-    // Inicijalizacija translate servisa
+
     this.translate.addLangs(['en', 'bs']);
     this.translate.setDefaultLang('bs');
 
-    // Učitaj jezik iz localStorage ili koristi default
+
     const savedLang = localStorage.getItem('language') || 'bs';
     this.currentLang = savedLang;
 
@@ -35,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Test translation
+
     this.translate.get('PRODUCTS.TITLE').subscribe((res: string) => {
       console.log('Translation for PRODUCTS.TITLE:', res);
       if (res === 'PRODUCTS.TITLE') {

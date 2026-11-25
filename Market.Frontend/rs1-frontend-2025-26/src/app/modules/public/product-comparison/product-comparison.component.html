@@ -1,0 +1,83 @@
+<section class="comparison-page">
+  <div class="comparison-toolbar">
+    <button mat-button routerLink="/">
+      <mat-icon>arrow_back</mat-icon>
+      Nazad na pretragu
+    </button>
+
+    <button mat-stroked-button color="warn" type="button" (click)="clearComparison()">
+      <mat-icon>delete_outline</mat-icon>
+      Očisti poređenje
+    </button>
+  </div>
+
+  <header class="comparison-hero">
+    <p class="eyebrow">Poređenje cijena</p>
+    <h1>Uporedi odabrane proizvode po prodavnici</h1>
+    <p>
+      Prikazujemo proizvode koje ste odabrali kroz ComparisonService, zajedno sa slikom,
+      nazivom, prodavnicama i posljednjom dostupnom cijenom iz novog compare API-ja.
+    </p>
+  </header>
+
+  <mat-card class="best-offer" *ngIf="cheapestRow as best">
+    <mat-icon>local_offer</mat-icon>
+    <div>
+      <span>Najpovoljnija opcija</span>
+      <strong>{{ best.productName }} u {{ best.storeName }} — {{ best.price | number:'1.2-2' }} KM</strong>
+    </div>
+
+  </mat-card>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <mat-spinner diameter="36"></mat-spinner>
+    <span>Učitavamo poređenje cijena...</span>
+  </div>
+
+  <mat-card class="empty-state" *ngIf="!isLoading && errorMessage">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ errorMessage }}</p>
+  </mat-card>
+
+  <div class="comparison-table-wrap" *ngIf="!isLoading && !errorMessage && rows.length > 0">
+    <table class="comparison-table">
+      <thead>
+      <tr>
+        <th>Proizvod</th>
+        <th>Prodavnica</th>
+        <th>Cijena po prodavnici</th>
+        <th>Zadnje ažuriranje</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of rows" [class.best-row]="cheapestRow?.productId === row.productId">
+        <td>
+          <div class="product-cell">
+            <img [src]="row.imageUrl" [alt]="row.productName" />
+            <div>
+              <span class="product-name">{{ row.productName }}</span>
+              <span class="product-id">ID: {{ row.productId }}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span class="store-name">{{ row.storeName }}</span>
+          <span class="product-id" *ngIf="row.branchAddress">{{ row.branchAddress }}</span>
+        </td>
+        <td>
+            <span class="price" *ngIf="row.price !== null; else noPrice">
+              {{ row.price | number:'1.2-2' }} KM
+            </span>
+          <ng-template #noPrice>
+            <span class="no-price">Nema cijene</span>
+          </ng-template>
+        </td>
+        <td>
+          <span *ngIf="row.dateUpdated; else noDate">{{ row.dateUpdated | date:'dd.MM.yyyy.' }}</span>
+          <ng-template #noDate>—</ng-template>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

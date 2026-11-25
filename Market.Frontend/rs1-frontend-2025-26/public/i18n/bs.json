@@ -17,7 +17,7 @@
     "LOGOUT": {
       "TITLE": "Odjava",
       "MESSAGE": "Odjavljivanje sa sistema...",
-      "REDIRECT_IN": "Preusmjeravanje za {{seconds}}s"
+      "REDIRECT_IN": "Preusmjeravanje na prijavu za {{seconds}}s"
     }
   },
   "ADMIN_PANEL": {
@@ -30,6 +30,7 @@
     "MENU": {
       "CATALOG": "KATALOG",
       "CATEGORIES": "Kategorije Proizvoda",
+      "BRANDS": "Brendovi",
       "PRODUCTS": "Proizvodi",
       "ORDERS_SECTION": "NARUDŽBE",
       "ORDERS": "Pregled Narudžbi",
@@ -82,6 +83,43 @@
       "ERROR_UPDATE": "Greška pri ažuriranju kategorije.",
       "ERROR_DELETE": "Greška pri brisanju kategorije.",
       "ERROR_TOGGLE": "Greška pri promjeni statusa kategorije \"{{name}}\"."
+    }
+  },
+  "PRODUCT_BRANDS": {
+    "TITLE": "Brendovi",
+    "SUBTITLE": "Upravljanje brendovima proizvoda",
+    "SEARCH_PLACEHOLDER": "Pretraži brendove",
+    "SEARCH_INPUT_PLACEHOLDER": "Unesite naziv brenda...",
+    "NEW_BRAND": "Novi Brend",
+    "ADD_NEW": "Dodaj Brend",
+    "LOADING": "Učitavanje brendova...",
+    "NO_DATA": "Nema brendova za prikaz",
+    "NO_DATA_FILTER": "Nema rezultata za pretragu",
+    "TABLE": {
+      "NAME": "Naziv",
+      "ACTIONS": "Akcije"
+    },
+    "ACTIONS": {
+      "EDIT_TOOLTIP": "Uredi brend",
+      "DELETE_TOOLTIP": "Obriši brend"
+    },
+    "FORM": {
+      "NAME": "Naziv Brenda",
+      "NAME_PLACEHOLDER": "Unesite naziv brenda",
+      "LOADING": "Učitavanje...",
+      "CANCEL": "Otkaži",
+      "SAVE": "Sačuvaj",
+      "UPDATE": "Ažuriraj"
+    },
+    "DIALOGS": {
+      "DELETE_TITLE": "Brisanje Brenda",
+      "DELETE_MESSAGE": "Da li ste sigurni da želite obrisati brend \"{{name}}\"?",
+      "SUCCESS_CREATE": "Brend uspješno kreiran.",
+      "SUCCESS_UPDATE": "Brend uspješno ažuriran.",
+      "SUCCESS_DELETE": "Brend uspješno obrisan.",
+      "ERROR_CREATE": "Greška pri kreiranju brenda.",
+      "ERROR_UPDATE": "Greška pri ažuriranju brenda.",
+      "ERROR_DELETE": "Greška pri brisanju brenda."
     }
   },
   "PRODUCTS": {

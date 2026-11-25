@@ -1,4 +1,4 @@
-// src/app/core/services/auth/current-user.service.ts
+
 import { Injectable, inject, computed } from '@angular/core';
 import { AuthFacadeService } from './auth-facade.service';
 
@@ -18,12 +18,12 @@ export class CurrentUserService {
     return this.auth.currentUser();
   }
 
-  /** Pravilo: admin > ostali → client */
+
   getDefaultRoute(): string {
     const user = this.snapshot;
-    if (!user) return '/login';
+    if (!user) return '/auth/login';
 
-    // Napraviti u ovisnosti od uloge
+
     if (user.isAdmin) return '/admin';
     return '/client';
   }

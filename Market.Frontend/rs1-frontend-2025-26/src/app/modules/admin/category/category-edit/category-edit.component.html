@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="header-card">
+    <h1>Uredi kategoriju</h1>
+  </div>
+
+  <div class="form-card">
+    <div *ngIf="isLoading && !form" class="loading-overlay">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Učitavanje podataka...</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading || form">
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Naziv kategorije *</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="npr. Televizori, Mobiteli"
+        />
+        <mat-icon matSuffix>category</mat-icon>
+        <mat-error *ngIf="hasError('name')">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opis</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          rows="6"
+          placeholder="Unesite opis kategorije (opcionalno)"
+        ></textarea>
+        <mat-icon matSuffix>description</mat-icon>
+        <mat-error *ngIf="hasError('description')">
+          {{ getErrorMessage('description') }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          mat-stroked-button
+          (click)="onCancel()"
+          [disabled]="isLoading"
+        >
+          <mat-icon>close</mat-icon>
+          Otkaži
+        </button>
+
+        <button
+          type="submit"
+          mat-raised-button
+          [disabled]="form.invalid || isLoading"
+        >
+          <mat-icon>save</mat-icon>
+          Sačuvaj izmjene
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

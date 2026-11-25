@@ -1,0 +1,32 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Muški avatar</title>
+  <desc id="desc">Minimalistički zeleni avatar muškarca na bež kružnoj pozadini.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#f7f0e2"/>
+      <stop offset="1" stop-color="#e2d7c5"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#4f684f"/>
+      <stop offset="1" stop-color="#1f3e31"/>
+    </linearGradient>
+    <linearGradient id="sage" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#b8c0a2"/>
+      <stop offset="1" stop-color="#6e7d5f"/>
+    </linearGradient>
+    <clipPath id="circle"><circle cx="256" cy="256" r="242"/></clipPath>
+  </defs>
+  <circle cx="256" cy="256" r="242" fill="url(#bg)"/>
+  <g clip-path="url(#circle)">
+    <path d="M-15 267c96-78 206-80 276 9 70 90 181 37 270 146v118H-15Z" fill="#82916f" opacity=".55"/>
+    <path d="M181 354c42 34 116 34 153 0l118 35c40 12 70 49 78 91l10 52H-28l10-52c8-42 38-79 78-91Z" fill="url(#hair)" opacity=".95"/>
+    <path d="M195 303c8 56 27 78 61 78 35 0 55-22 62-78l-25-13h-73Z" fill="#f3eddf"/>
+    <path d="M174 210c0-66 32-107 87-107 58 0 89 41 89 107v42c0 67-40 111-89 111s-87-44-87-111Z" fill="#f5efe2"/>
+    <ellipse cx="169" cy="239" rx="14" ry="26" fill="#f3eddf"/>
+    <ellipse cx="354" cy="239" rx="14" ry="26" fill="#f3eddf"/>
+    <path d="M167 223c-4-58 16-102 57-119 36-15 84-9 112 16 22 20 28 51 19 103l-15 29c-3-30-8-59-23-80-42 15-84 7-123-21-19 18-16 62-27 101Z" fill="url(#hair)"/>
+    <path d="M181 150c-24-18-24-50 1-67 0 17 13 26 30 21 26-8 53-3 81 7-44 0-82 17-112 39Z" fill="url(#hair)"/>
+    <path d="M181 354c41 41 116 42 153 0l31 9c-41 47-170 48-214 0Z" fill="#f3eddf"/>
+  </g>
+  <circle cx="256" cy="256" r="242" fill="none" stroke="#ffffff" stroke-width="14" opacity=".75"/>
+</svg>

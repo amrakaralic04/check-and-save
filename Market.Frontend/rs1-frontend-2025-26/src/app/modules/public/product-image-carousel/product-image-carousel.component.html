@@ -1,0 +1,43 @@
+<div class="carousel" *ngIf="images.length > 0">
+
+  <!-- Slide -->
+  <div class="carousel__track">
+    <img
+      class="carousel__img"
+      [src]="images[currentIndex]"
+      [alt]="'Slika ' + (currentIndex + 1)"
+    />
+  </div>
+
+  <!-- Prev / Next buttons -->
+  <button
+    class="carousel__btn carousel__btn--prev"
+    type="button"
+    (click)="prev()"
+    *ngIf="images.length > 1"
+    aria-label="Prethodna slika">
+    &#8249;
+  </button>
+
+  <button
+    class="carousel__btn carousel__btn--next"
+    type="button"
+    (click)="next()"
+    *ngIf="images.length > 1"
+    aria-label="Sljedeća slika">
+    &#8250;
+  </button>
+
+  <!-- Dots -->
+  <div class="carousel__dots" *ngIf="images.length > 1">
+    <button
+      class="carousel__dot"
+      type="button"
+      *ngFor="let img of images; let i = index"
+      [class.carousel__dot--active]="i === currentIndex"
+      (click)="goTo(i)"
+      [attr.aria-label]="'Idi na sliku ' + (i + 1)">
+    </button>
+  </div>
+
+</div>

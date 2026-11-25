@@ -1,0 +1,30 @@
+<section class="detail-page">
+  @if (product) {
+    <button mat-button routerLink="/">
+      <mat-icon>arrow_back</mat-icon>
+      Nazad na pretragu
+    </button>
+
+    <mat-card class="detail-card">
+
+      <!-- Carousel umjesto single img -->
+      <app-product-image-carousel
+        [images]="product.images"
+        [autoPlay]="true"
+        [intervalMs]="3000">
+      </app-product-image-carousel>
+
+      <div class="content">
+        <span class="category">{{ product.category }}</span>
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+
+        <div class="meta-item"><strong>Brend:</strong> {{ product.brand }}</div>
+        <div class="meta-item"><strong>Ocjena:</strong> {{ product.rating }}</div>
+        <div class="price">{{ product.price | currency:'BAM ':'symbol':'1.0-0' }}</div>
+      </div>
+    </mat-card>
+  } @else {
+    <p>Proizvod nije pronađen.</p>
+  }
+</section>

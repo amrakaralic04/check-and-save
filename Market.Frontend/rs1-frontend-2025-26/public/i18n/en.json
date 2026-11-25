@@ -17,7 +17,7 @@
     "LOGOUT": {
       "TITLE": "Logout",
       "MESSAGE": "Logging you out of the system...",
-      "REDIRECT_IN": "Redirecting in {{seconds}}s"
+      "REDIRECT_IN": "Redirecting to login in {{seconds}}s"
     }
   },
   "ADMIN_PANEL": {
@@ -30,6 +30,7 @@
     "MENU": {
       "CATALOG": "CATALOG",
       "CATEGORIES": "Product Categories",
+      "BRANDS": "Brands",
       "PRODUCTS": "Products",
       "ORDERS_SECTION": "ORDERS",
       "ORDERS": "Orders Overview",
@@ -82,6 +83,43 @@
       "ERROR_UPDATE": "Error updating category.",
       "ERROR_DELETE": "Error deleting category.",
       "ERROR_TOGGLE": "Error changing status of category \"{{name}}\"."
+    }
+  },
+  "PRODUCT_BRANDS": {
+    "TITLE": "Brands",
+    "SUBTITLE": "Manage product brands",
+    "SEARCH_PLACEHOLDER": "Search brands",
+    "SEARCH_INPUT_PLACEHOLDER": "Enter brand name...",
+    "NEW_BRAND": "New Brand",
+    "ADD_NEW": "Add Brand",
+    "LOADING": "Loading brands...",
+    "NO_DATA": "No brands to display",
+    "NO_DATA_FILTER": "No results found for search",
+    "TABLE": {
+      "NAME": "Name",
+      "ACTIONS": "Actions"
+    },
+    "ACTIONS": {
+      "EDIT_TOOLTIP": "Edit brand",
+      "DELETE_TOOLTIP": "Delete brand"
+    },
+    "FORM": {
+      "NAME": "Brand Name",
+      "NAME_PLACEHOLDER": "Enter brand name",
+      "LOADING": "Loading...",
+      "CANCEL": "Cancel",
+      "SAVE": "Save",
+      "UPDATE": "Update"
+    },
+    "DIALOGS": {
+      "DELETE_TITLE": "Delete Brand",
+      "DELETE_MESSAGE": "Are you sure you want to delete brand \"{{name}}\"?",
+      "SUCCESS_CREATE": "Brand created successfully.",
+      "SUCCESS_UPDATE": "Brand updated successfully.",
+      "SUCCESS_DELETE": "Brand deleted successfully.",
+      "ERROR_CREATE": "Error creating brand.",
+      "ERROR_UPDATE": "Error updating brand.",
+      "ERROR_DELETE": "Error deleting brand."
     }
   },
   "PRODUCTS": {
